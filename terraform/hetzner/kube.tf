@@ -47,7 +47,7 @@ module "kube-hetzner" {
   enable_longhorn        = true
   longhorn_replica_count = 1
 
-  allow_scheduling_on_control_plane = true
+  allow_scheduling_on_control_plane = false
 
   automatically_upgrade_os = false
 
