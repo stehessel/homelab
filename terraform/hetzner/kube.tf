@@ -90,3 +90,11 @@ output "kubeconfig" {
   value     = module.kube-hetzner.kubeconfig_file
   sensitive = true
 }
+
+output "control_planes_public_ipv4" {
+  value = module.kube-hetzner.control_planes_public_ipv4
+}
+
+output "agents_public_ipv4" {
+  value = module.kube-hetzner.agents_public_ipv4
+}
