@@ -2,6 +2,10 @@ data "sops_file" "secrets" {
   source_file = "secrets/prod.yaml"
 }
 
+provider "hcloud" {
+  token = data.sops_file.secrets.data["hcloud.token"]
+}
+
 module "kube-hetzner" {
   providers = {
     hcloud = hcloud
@@ -58,8 +62,4 @@ module "kube-hetzner" {
   # The kubeconfig file can instead be created by executing: "terraform output --raw kubeconfig > cluster_kubeconfig.yaml"
   # Be careful to not commit this file!
   create_kubeconfig = false
-}
-
-provider "hcloud" {
-  token = data.sops_file.secrets.data["hcloud.token"]
 }
