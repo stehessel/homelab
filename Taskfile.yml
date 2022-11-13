@@ -1,0 +1,17 @@
+version: "3"
+
+includes:
+  terraform:
+    dir: ./terraform/hetzner
+    taskfile: ./terraform/hetzner
+
+tasks:
+  flux/bootstrap:
+    cmds:
+      - flux bootstrap github
+        --owner=stehessel
+        --repository=infrastructure
+        --path=clusters/k3s
+        --branch=master
+        --personal
+        --token-auth
