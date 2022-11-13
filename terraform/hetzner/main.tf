@@ -14,8 +14,8 @@ module "kube-hetzner" {
 
   source = "kube-hetzner/kube-hetzner/hcloud"
 
-  ssh_public_key  = file("/run/secrets/ssh/hcloud/public")
-  ssh_private_key = file("/run/secrets/ssh/hcloud/private")
+  ssh_public_key  = file(var.hcloud_ssh_public_key_file)
+  ssh_private_key = file(var.hcloud_ssh_private_key_file)
 
   network_region = "eu-central"
 
@@ -56,6 +56,8 @@ module "kube-hetzner" {
   automatically_upgrade_os = false
 
   initial_k3s_channel = "v1.24"
+
+  enable_cert_manager = true
 
   # Don't create a local kubeconfig file. For backwards compatibility this is set to true by default in the module but for automatic runs this can cause issues.
   # See https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner/issues/349
