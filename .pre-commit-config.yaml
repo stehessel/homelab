@@ -6,11 +6,6 @@ repos:
       - id: check-merge-conflict
       - id: detect-private-key
       - id: trailing-whitespace
-  - repo: https://github.com/adrienverge/yamllint
-    rev: v1.28.0
-    hooks:
-      - id: yamllint
-    exclude: "clusters/k3s/flux-system"
   - repo: https://github.com/k8s-at-home/sops-pre-commit
     rev: v2.1.1
     hooks:
