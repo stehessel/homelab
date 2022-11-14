@@ -18,13 +18,11 @@ tasks:
     desc: Bootstrap fluxcd operator
 
   up:
-    deps:
-      - terraform:init
-      - terraform:apply
-      - flux:bootstrap
-    cmds: []
+    cmds:
+      - task: terraform:init
+      - task: terraform:apply
+      - task: flux:bootstrap
 
   destroy:
     deps:
       - terraform:destroy
-    cmds: []
