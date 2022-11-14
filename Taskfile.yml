@@ -22,7 +22,9 @@ tasks:
       - task: terraform:init
       - task: terraform:apply
       - task: flux:bootstrap
+    desc: Turn up the cluster and bootstrap fluxcd
 
   destroy:
     deps:
       - terraform:destroy
+    desc: Destroy the cluster
