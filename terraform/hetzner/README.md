@@ -1,11 +1,7 @@
-# Infrastructure repository
+# Terraform
 
-## Terraform
+Use the [Taskfile](Taskfile.yml) to manage terraform:
 
-To initialize terraform run:
-
-```sh
-terraform init \
-    -backend-config="access_key=$(sops --decrypt --extract '["backblaze"]["keyID"]' secrets/prod.yaml)" \
-    -backend-config="secret_key=$(sops --decrypt --extract '["backblaze"]["applicationKey"]' secrets/prod.yaml)"
-```
+- `task init` to initialize terraform.
+- `task apply` to apply the terraform configuration.
+- `task desotry` to destroy terraform resources.

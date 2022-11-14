@@ -10,7 +10,7 @@ tasks:
     cmds:
       - flux bootstrap github
         --owner=stehessel
-        --repository=infrastructure
+        --repository=homelab
         --path=flux/clusters/k3s
         --branch=master
         --personal

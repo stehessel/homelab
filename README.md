@@ -1,4 +1,4 @@
-# Infrastructure
+# Homelab
 
 Infrastructure code to run my home lab Kubernetes cluster.
 
