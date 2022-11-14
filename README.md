@@ -7,13 +7,7 @@ Infrastructure code to run my home lab Kubernetes cluster.
 Bootstrap `fluxcd` via
 
 ```sh
-flux bootstrap github \
-        --owner=$GITHUB_USER \
-        --repository=infrastructure \
-        --path=clusters/k3s \
-        --branch=master \
-        --personal \
-        --token-auth
+task flux:bootstrap
 ```
 
-after setting the `GITHUB_USER` and `GITHUB_TOKEN` environment variables (see [](./.envrc)).
+after setting the `GITHUB_USER` and `GITHUB_TOKEN` environment variables (see [.envrc](.envrc)).

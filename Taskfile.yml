@@ -11,7 +11,7 @@ tasks:
       - flux bootstrap github
         --owner=stehessel
         --repository=infrastructure
-        --path=clusters/k3s
+        --path=flux/clusters/k3s
         --branch=master
         --personal
         --token-auth
