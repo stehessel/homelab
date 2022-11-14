@@ -6,4 +6,10 @@ tasks:
       - terraform init
         -backend-config="access_key=$(sops --decrypt --extract '["backblaze"]["keyID"]' secrets/prod.yaml)"
         -backend-config="secret_key=$(sops --decrypt --extract '["backblaze"]["applicationKey"]' secrets/prod.yaml)"
-    desc: Init terraform
+    desc: Init terraform with backblaze backend
+
+  apply:
+    cmds:
+      - terraform apply -auto-approve
+      - terraform output --raw kubeconfig > kubeconfig.yaml
+    desc: Apply terraform configuration

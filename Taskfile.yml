@@ -6,7 +6,7 @@ includes:
     taskfile: ./terraform/hetzner
 
 tasks:
-  flux/bootstrap:
+  flux:bootstrap:
     cmds:
       - flux bootstrap github
         --owner=stehessel
@@ -15,4 +15,11 @@ tasks:
         --branch=master
         --personal
         --token-auth
-    desc: Bootstrap fluxcd
+    desc: Bootstrap fluxcd operator
+
+  up:
+    deps:
+      - terraform:init
+      - terraform:apply
+      - flux:bootstrap
+    cmds: []
