@@ -23,3 +23,8 @@ tasks:
       - terraform:apply
       - flux:bootstrap
     cmds: []
+
+  destroy:
+    deps:
+      - terraform:destroy
+    cmds: []
