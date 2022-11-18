@@ -30,6 +30,12 @@
 
 set -o errexit
 
+echo "INFO - Downloading dependencies"
+curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 > /tmp/yq && chmod +x /tmp/yq
+GOBIN=/tmp/ GO111MODULE=on go install sigs.k8s.io/kustomize/kustomize/v4@latest
+curl -sL https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz > /tmp/kubeconform.tar.gz
+tar -xf /tmp/kubeconform.tar.gz -C /tmp && chmod +x /tmp/kubeconform
+
 echo "INFO - Downloading Flux OpenAPI schemas"
 mkdir -p /tmp/flux-crd-schemas/master-standalone-strict
 curl -sL https://github.com/fluxcd/flux2/releases/latest/download/crd-schemas.tar.gz | tar zxf - -C /tmp/flux-crd-schemas/master-standalone-strict
@@ -37,15 +43,15 @@ curl -sL https://github.com/fluxcd/flux2/releases/latest/download/crd-schemas.ta
 find . -type f -name '*.yaml' -print0 | while IFS= read -r -d $'\0' file;
   do
     echo "INFO - Validating $file"
-    yq e 'true' "$file" > /dev/null
+    /tmp/yq e 'true' "$file" > /dev/null
 done
 
 kubeconform_config=("-strict" "-ignore-missing-schemas" "-schema-location" "default" "-schema-location" "/tmp/flux-crd-schemas" "-verbose")
 
 echo "INFO - Validating clusters"
-find ./clusters -maxdepth 2 -type f -name '*.yaml' -print0 | while IFS= read -r -d $'\0' file;
+find ./flux/clusters -maxdepth 2 -type f -name '*.yaml' -print0 | while IFS= read -r -d $'\0' file;
   do
-    kubeconform "${kubeconform_config[@]}" "${file}"
+    /tmp/kubeconform "${kubeconform_config[@]}" "${file}"
     if [[ ${PIPESTATUS[0]} != 0 ]]; then
       exit 1
     fi
@@ -59,8 +65,8 @@ echo "INFO - Validating kustomize overlays"
 find . -type f -name $kustomize_config -print0 | while IFS= read -r -d $'\0' file;
   do
     echo "INFO - Validating kustomization ${file/%$kustomize_config}"
-    kustomize build "${file/%$kustomize_config}" "${kustomize_flags[@]}" | \
-      kubeconform "${kubeconform_config[@]}"
+    /tmp/kustomize build "${file/%$kustomize_config}" "${kustomize_flags[@]}" | \
+      /tmp/kubeconform "${kubeconform_config[@]}"
     if [[ ${PIPESTATUS[0]} != 0 ]]; then
       exit 1
     fi
