@@ -21,3 +21,12 @@ repos:
     rev: v2.1.1
     hooks:
       - id: forbid-secrets
+  - repo: local
+    hooks:
+      - id: validate-kustomize
+        name: Validate kustomize resources
+        description: Validate Flux custom resources and kustomize overlays using kubeconform.
+        entry: ./scripts/validate.sh
+        pass_filenames: false
+        language: script
+        types: [yaml]
