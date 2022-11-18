@@ -1,5 +1,7 @@
 # Homelab
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/stehessel/homelab/master.svg)](https://results.pre-commit.ci/latest/github/stehessel/homelab/master)
+
 Infrastructure code to run my home lab Kubernetes cluster.
 
 ## Continuous deployment
