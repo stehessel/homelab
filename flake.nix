@@ -19,10 +19,9 @@
     pre-commit-hooks,
     flake-utils,
   }:
-    flake-utils.lib.eachDefaultSystem
-    (
+    flake-utils.lib.eachDefaultSystem (
       system: let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {inherit system;};
       in {
         checks = {
           pre-commit-check = pre-commit-hooks.lib.${system}.run {
@@ -82,8 +81,19 @@
             };
           };
         };
-        devShells.default = nixpkgs.legacyPackages.${system}.mkShell {
+        devShells.default = pkgs.mkShell {
           inherit (self.checks.${system}.pre-commit-check) shellHook;
+
+          buildInputs = [
+            pkgs.fluxcd
+            pkgs.go-task
+            pkgs.hcloud
+            pkgs.hello
+            pkgs.kubeconform
+            pkgs.kustomize
+            pkgs.terraform
+            pkgs.yq-go
+          ];
         };
       }
     );
