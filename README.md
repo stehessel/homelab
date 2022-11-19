@@ -1,6 +1,6 @@
 # Homelab
 
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/stehessel/homelab/master.svg)](https://results.pre-commit.ci/latest/github/stehessel/homelab/master)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/stehessel/homelab/Check?label=check&style=for-the-badge)
 
 Infrastructure code to run my home lab Kubernetes cluster.
 
