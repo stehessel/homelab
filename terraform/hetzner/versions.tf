@@ -4,7 +4,11 @@ terraform {
     # Hetzner
     hcloud = {
       source  = "hetznercloud/hcloud"
-      version = ">= 1.35.1"
+      version = "~> 1.35.1"
+    }
+    porkbun = {
+      source  = "cullenmcdermott/porkbun"
+      version = "~> 0.1.0"
     }
     sops = {
       source  = "carlpett/sops"

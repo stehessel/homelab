@@ -49,7 +49,7 @@ module "kube-hetzner" {
   base_domain = "stehessel.org"
 
   # Ingress
-  enable_nginx = true
+  enable_nginx   = true
   enable_traefik = false
 
   enable_longhorn        = true
@@ -68,4 +68,23 @@ module "kube-hetzner" {
   # The kubeconfig file can instead be created by executing: "terraform output --raw kubeconfig > cluster_kubeconfig.yaml"
   # Be careful to not commit this file!
   create_kubeconfig = false
+}
+
+provider "porkbun" {
+  api_key    = data.sops_file.secrets.data["porkbun.apiKey"]
+  secret_key = data.sops_file.secrets.data["porkbun.secretKey"]
+}
+
+resource "porkbun_dns_record" "hostIPv4" {
+  name    = "*"
+  domain  = "stehessel.org"
+  content = module.kube-hetzner.ingress_public_ipv4
+  type    = "A"
+}
+
+resource "porkbun_dns_record" "hostIPv6" {
+  name    = "*"
+  domain  = "stehessel.org"
+  content = module.kube-hetzner.ingress_public_ipv6
+  type    = "AAAA"
 }
