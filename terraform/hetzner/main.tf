@@ -1,5 +1,5 @@
 data "sops_file" "secrets" {
-  source_file = "secrets/prod.yaml"
+  source_file = "secrets/base.yaml"
 }
 
 provider "hcloud" {

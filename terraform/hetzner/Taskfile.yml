@@ -4,8 +4,8 @@ tasks:
   init:
     cmds:
       - terraform init
-        -backend-config="access_key=$(sops --decrypt --extract '["backblaze"]["keyID"]' secrets/prod.yaml)"
-        -backend-config="secret_key=$(sops --decrypt --extract '["backblaze"]["applicationKey"]' secrets/prod.yaml)"
+        -backend-config="access_key=$(sops --decrypt --extract '["backblaze"]["keyID"]' secrets/base.yaml)"
+        -backend-config="secret_key=$(sops --decrypt --extract '["backblaze"]["applicationKey"]' secrets/base.yaml)"
     desc: Init terraform with backblaze backend
 
   apply:
