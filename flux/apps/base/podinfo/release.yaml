@@ -24,9 +24,9 @@ spec:
     ingress:
       enabled: true
       annotations:
-        kubernetes.io/ingress.class: traefik
+        kubernetes.io/ingress.class: nginx
       hosts:
-        - host: podinfo.production
+        - host: stehessel.org
           paths:
             - path: /
               pathType: ImplementationSpecific

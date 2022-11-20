@@ -46,7 +46,11 @@ module "kube-hetzner" {
   load_balancer_type     = "lb11"
   load_balancer_location = "nbg1"
 
-  base_domain = "hesselmann.cloud"
+  base_domain = "stehessel.org"
+
+  # Ingress
+  enable_nginx = true
+  enable_traefik = false
 
   enable_longhorn        = true
   longhorn_replica_count = 1
