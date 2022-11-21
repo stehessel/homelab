@@ -1,0 +1,7 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: porkbun-webhook
+spec:
+  interval: 5m
+  url: https://github.com/mdonoughe/porkbun-webhook/tree/main/deploy/porkbun-webhook
