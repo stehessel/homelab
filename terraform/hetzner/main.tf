@@ -75,14 +75,29 @@ provider "porkbun" {
   secret_key = data.sops_file.secrets.data["porkbun.secretKey"]
 }
 
-resource "porkbun_dns_record" "hostIPv4" {
+
+resource "porkbun_dns_record" "baseIPv4" {
+  name = ""
+  domain  = "stehessel.org"
+  content = module.kube-hetzner.ingress_public_ipv4
+  type    = "A"
+}
+
+resource "porkbun_dns_record" "starIPv4" {
   name    = "*"
   domain  = "stehessel.org"
   content = module.kube-hetzner.ingress_public_ipv4
   type    = "A"
 }
 
-resource "porkbun_dns_record" "hostIPv6" {
+resource "porkbun_dns_record" "baseIPv6" {
+  name = ""
+  domain  = "stehessel.org"
+  content = module.kube-hetzner.ingress_public_ipv6
+  type    = "AAAA"
+}
+
+resource "porkbun_dns_record" "starIPv6" {
   name    = "*"
   domain  = "stehessel.org"
   content = module.kube-hetzner.ingress_public_ipv6
