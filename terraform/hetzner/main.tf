@@ -49,29 +49,13 @@ module "kube-hetzner" {
   base_domain = "stehessel.org"
 
   # Ingress
-  enable_nginx         = true
-  nginx_ingress_values = <<EOT
-    controller:
-      watchIngressWithoutClass: "true"
-      kind: "Deployment"
-      replicaCount: 1
-      config:
-        "use-forwarded-headers": "true"
-        "compute-full-forwarded-for": "true"
-        "use-proxy-protocol": "true"
-      service:
-        annotations:
-          "load-balancer.hetzner.cloud/name": "k3s"
-          "load-balancer.hetzner.cloud/use-private-ip": "true"
-          "load-balancer.hetzner.cloud/disable-private-ingress": "true"
-          "load-balancer.hetzner.cloud/ipv6-disabled": "false"
-          "load-balancer.hetzner.cloud/location": "nbg1"
-          "load-balancer.hetzner.cloud/type": "lb11"
-          "load-balancer.hetzner.cloud/uses-proxyprotocol": "true"
-          "load-balancer.hetzner.cloud/hostname": ""
-  EOT
-
-  enable_traefik = false
+  enable_traefik = true
+  # traefik_additional_options = [
+  #   "--entrypoints.web.address=:80",
+  #   "--entrypoints.web.http.redirections.entryPoint.to=websecure",
+  #   "--entrypoints.websecure.address=:443",
+  #   "--providers.kubernetesingress"
+  # ]
 
   enable_longhorn        = true
   longhorn_replica_count = 1

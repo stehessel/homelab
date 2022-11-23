@@ -1,22 +1,14 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt-staging
+  name: letsencrypt
 spec:
   acme:
     email: accounts@stehessel.de
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt-staging
+      name: letsencrypt
     solvers:
-      - dns01:
-          webhook:
-            groupName: acme.stehessel.org
-            solverName: porkbun
-            config:
-              apiKeySecretRef:
-                name: porkbun-key
-                key: api-key
-              secretKeySecretRef:
-                name: porkbun-key
-                key: secret-key
+      - http01:
+          ingress:
+            class: traefik
