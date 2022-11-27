@@ -1,3 +1,4 @@
 .terraform/
 kubeconfig.yaml
 k3s_kustomization_backup.yaml
+terraform.tfstate*

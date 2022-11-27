@@ -1,6 +1,7 @@
 ignore: |
   *.sops.*
   flux-system/
+  terraform/hetzner/extra-manifests/gateway.yaml
 extends: default
 rules:
   braces:
