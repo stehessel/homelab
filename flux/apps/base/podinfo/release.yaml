@@ -21,19 +21,3 @@ spec:
   # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
   values:
     cache: tcp://redis-master.redis.svc.cluster.local:6379
-    ingress:
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-        kubernetes.io/ingress.class: traefik
-        # traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
-      enabled: true
-      hosts:
-        - host: stehessel.org
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-      tls:
-        - hosts:
-            - stehessel.org
-          secretName: stehessel-org-tls
