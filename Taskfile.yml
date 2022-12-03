@@ -15,6 +15,7 @@ tasks:
         --branch=master
         --personal
         --token-auth
+    internal: true
     desc: Bootstrap fluxcd operator
 
   up:

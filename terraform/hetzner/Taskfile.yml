@@ -23,5 +23,5 @@ tasks:
   destroy:
     cmds:
       - terraform destroy -auto-approve
-      - rm kubeconfig.yaml
+      - rm -f kubeconfig.yaml
     desc: Destroy terraform resources
