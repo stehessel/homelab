@@ -7,8 +7,14 @@ spec:
   valuesContent: |-
     globalArguments: []
     experimental:
+      http3: true
       kubernetesGateway:
         enabled: true
+        gateway:
+          enabled: false
+    providers:
+      kubernetesIngress:
+        enabled: false
     service:
       enabled: true
       type: LoadBalancer
