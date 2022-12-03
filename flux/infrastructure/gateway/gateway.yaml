@@ -3,6 +3,8 @@ kind: Gateway
 metadata:
   name: traefik-gateway
   namespace: kube-system
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   gatewayClassName: traefik
   listeners:
@@ -12,12 +14,17 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    # - name: websecure
-    #   protocol: HTTPS
-    #   port: 8443
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: Selector
-    #       selector:
-    #         matchLabels:
-    #           gateway-access: "true"
+    - name: websecure
+      hostname: stehessel.org
+      protocol: HTTPS
+      port: 8443
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              gateway-access: "true"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: stehessel-org-tls

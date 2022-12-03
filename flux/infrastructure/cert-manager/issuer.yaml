@@ -10,5 +10,8 @@ spec:
       name: letsencrypt
     solvers:
       - http01:
-          ingress:
-            class: traefik
+          gatewayHTTPRoute:
+            parentRefs:
+              - name: traefik-gateway
+                namespace: kube-system
+                kind: Gateway

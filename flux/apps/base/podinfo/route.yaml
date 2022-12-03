@@ -6,6 +6,7 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: kube-system
+      kind: Gateway
   hostnames:
     - stehessel.org
   rules:
