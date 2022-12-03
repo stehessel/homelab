@@ -14,17 +14,17 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    - name: websecure
-      hostname: stehessel.org
-      protocol: HTTPS
-      port: 8443
-      allowedRoutes:
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              gateway-access: "true"
-      tls:
-        mode: Terminate
-        certificateRefs:
-          - name: stehessel-org-tls
+    # - name: websecure
+    #   hostname: stehessel.org
+    #   protocol: HTTPS
+    #   port: 8443
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: Selector
+    #       selector:
+    #         matchLabels:
+    #           gateway-access: "true"
+    #   tls:
+    #     mode: Terminate
+    #     certificateRefs:
+    #       - name: stehessel-org-tls
