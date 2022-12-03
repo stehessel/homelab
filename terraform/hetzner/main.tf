@@ -33,7 +33,7 @@ module "kube-hetzner" {
   agent_nodepools = [
     {
       name        = "agent-nbg1",
-      server_type = "cpx11",
+      server_type = "cpx21",
       location    = "nbg1",
       labels = [
         "node.kubernetes.io/server-usage=storage"
@@ -48,14 +48,9 @@ module "kube-hetzner" {
 
   base_domain = "stehessel.org"
 
-  # Ingress
-  enable_traefik = true
-  # traefik_additional_options = [
-  #   "--entrypoints.web.address=:80",
-  #   "--entrypoints.web.http.redirections.entryPoint.to=websecure",
-  #   "--entrypoints.websecure.address=:443",
-  #   "--providers.kubernetesingress"
-  # ]
+  enable_traefik = false
+
+  enable_metrics_server = false
 
   enable_longhorn        = true
   longhorn_replica_count = 1
@@ -86,30 +81,30 @@ provider "porkbun" {
 }
 
 
-resource "porkbun_dns_record" "baseIPv4" {
-  name    = ""
-  domain  = "stehessel.org"
-  content = module.kube-hetzner.ingress_public_ipv4
-  type    = "A"
-}
-
-resource "porkbun_dns_record" "starIPv4" {
-  name    = "*"
-  domain  = "stehessel.org"
-  content = module.kube-hetzner.ingress_public_ipv4
-  type    = "A"
-}
-
-resource "porkbun_dns_record" "baseIPv6" {
-  name    = ""
-  domain  = "stehessel.org"
-  content = module.kube-hetzner.ingress_public_ipv6
-  type    = "AAAA"
-}
-
-resource "porkbun_dns_record" "starIPv6" {
-  name    = "*"
-  domain  = "stehessel.org"
-  content = module.kube-hetzner.ingress_public_ipv6
-  type    = "AAAA"
-}
+# resource "porkbun_dns_record" "baseIPv4" {
+#   name    = ""
+#   domain  = "stehessel.org"
+#   content = module.kube-hetzner.ingress_public_ipv4
+#   type    = "A"
+# }
+#
+# resource "porkbun_dns_record" "starIPv4" {
+#   name    = "*"
+#   domain  = "stehessel.org"
+#   content = module.kube-hetzner.ingress_public_ipv4
+#   type    = "A"
+# }
+#
+# resource "porkbun_dns_record" "baseIPv6" {
+#   name    = ""
+#   domain  = "stehessel.org"
+#   content = module.kube-hetzner.ingress_public_ipv6
+#   type    = "AAAA"
+# }
+#
+# resource "porkbun_dns_record" "starIPv6" {
+#   name    = "*"
+#   domain  = "stehessel.org"
+#   content = module.kube-hetzner.ingress_public_ipv6
+#   type    = "AAAA"
+# }

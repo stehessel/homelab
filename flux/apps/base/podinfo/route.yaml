@@ -4,8 +4,8 @@ metadata:
   name: podinfo
 spec:
   parentRefs:
-    - name: traefik-gateway
-      namespace: kube-system
+    - name: gateway
+      namespace: istio-ingress
       kind: Gateway
   hostnames:
     - stehessel.org

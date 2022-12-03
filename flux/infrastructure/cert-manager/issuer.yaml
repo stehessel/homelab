@@ -5,13 +5,13 @@ metadata:
 spec:
   acme:
     email: accounts@stehessel.de
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt
     solvers:
       - http01:
           gatewayHTTPRoute:
             parentRefs:
-              - name: traefik-gateway
-                namespace: kube-system
+              - name: gateway
+                namespace: istio-ingress
                 kind: Gateway

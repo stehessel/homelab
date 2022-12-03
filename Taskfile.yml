@@ -18,11 +18,18 @@ tasks:
     internal: true
     desc: Bootstrap fluxcd operator
 
+  istio:install:
+    cmds:
+      - istioctl install --set profile=minimal -y
+    internal: true
+    desc: Install Istio with minimal capabilities
+
   up:
     cmds:
       - task: terraform:init
       - task: terraform:apply
       - task: flux:bootstrap
+      - task: istio:install
     desc: Turn up the cluster and bootstrap fluxcd
 
   destroy:
