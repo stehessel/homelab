@@ -5,7 +5,7 @@ metadata:
 spec:
   parentRefs:
     - name: gateway
-      namespace: istio-ingress
+      namespace: ingress
       kind: Gateway
   hostnames:
     - stehessel.org

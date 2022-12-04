@@ -29,7 +29,7 @@ tasks:
       - task: terraform:init
       - task: terraform:apply
       - task: flux:bootstrap
-      - task: istio:install
+      # - task: istio:install
     desc: Turn up the cluster and bootstrap fluxcd
 
   destroy:

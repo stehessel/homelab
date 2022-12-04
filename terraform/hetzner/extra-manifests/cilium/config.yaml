@@ -1,0 +1,25 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: cilium
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    image:
+      tag: 1.13.0-rc3
+
+    ipam:
+      operator:
+        clusterPoolIPv4PodCIDRList:
+          - 10.42.0.0/16
+    devices: eth1
+
+    gatewayAPI:
+      enable: true
+    kubeProxyReplacement: strict
+
+    hubble:
+      relay:
+        enabled: true
+      ui:
+        enabled: true

@@ -13,5 +13,5 @@ spec:
           gatewayHTTPRoute:
             parentRefs:
               - name: gateway
-                namespace: istio-ingress
+                namespace: ingress
                 kind: Gateway

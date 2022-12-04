@@ -48,6 +48,8 @@ module "kube-hetzner" {
 
   base_domain = "stehessel.org"
 
+  cni_plugin    = "cilium"
+
   enable_traefik = false
 
   enable_metrics_server = false
