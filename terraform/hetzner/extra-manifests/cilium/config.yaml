@@ -12,7 +12,6 @@ spec:
         tag: 1.13.0-rc3
 
     ipam:
-      mode: kubernetes
       operator:
         clusterPoolIPv4PodCIDRList:
           - 10.42.0.0/16
@@ -23,8 +22,6 @@ spec:
     kubeProxyReplacement: strict
     nodeinit:
       enabled: true
-    securityContext:
-      privileged: true
 
     hubble:
       relay:
