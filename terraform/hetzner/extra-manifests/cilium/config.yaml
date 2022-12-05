@@ -7,8 +7,12 @@ spec:
   valuesContent: |-
     image:
       tag: 1.13.0-rc3
+    operator:
+      image:
+        tag: 1.13.0-rc3
 
     ipam:
+      mode: kubernetes
       operator:
         clusterPoolIPv4PodCIDRList:
           - 10.42.0.0/16
@@ -17,6 +21,10 @@ spec:
     gatewayAPI:
       enable: true
     kubeProxyReplacement: strict
+    nodeinit:
+      enabled: true
+    securityContext:
+      privileged: true
 
     hubble:
       relay:

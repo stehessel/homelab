@@ -13,6 +13,7 @@ tasks:
     cmds:
       - terraform apply -auto-approve
       - terraform output --raw kubeconfig > kubeconfig.yaml
+      - chmod 700 kubeconfig.yaml
     desc: Apply terraform configuration
 
   clear:
