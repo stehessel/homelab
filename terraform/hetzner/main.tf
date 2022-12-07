@@ -48,7 +48,7 @@ module "kube-hetzner" {
 
   base_domain = "stehessel.org"
 
-  cni_plugin    = "cilium"
+  cni_plugin    = "calico"
 
   enable_traefik = false
 
