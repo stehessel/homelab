@@ -48,7 +48,7 @@ module "kube-hetzner" {
 
   base_domain = "stehessel.org"
 
-  cni_plugin    = "calico"
+  cni_plugin = "calico"
 
   enable_traefik = false
 
@@ -56,6 +56,7 @@ module "kube-hetzner" {
 
   enable_longhorn        = true
   longhorn_replica_count = 1
+  disable_hetzner_csi    = true
 
   allow_scheduling_on_control_plane = false
 
