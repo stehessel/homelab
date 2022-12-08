@@ -43,29 +43,23 @@ module "kube-hetzner" {
     }
   ]
 
+  allow_scheduling_on_control_plane = false
+  automatically_upgrade_os          = false
+  initial_k3s_channel               = "v1.24"
+
   load_balancer_type     = "lb11"
   load_balancer_location = "nbg1"
-
-  base_domain = "stehessel.org"
-
-  cni_plugin = "calico"
-
-  enable_traefik = false
-
-  enable_metrics_server = false
+  base_domain            = "stehessel.org"
+  cni_plugin             = "calico"
 
   enable_longhorn        = true
   longhorn_replica_count = 1
   disable_hetzner_csi    = true
 
-  allow_scheduling_on_control_plane = false
-
-  automatically_upgrade_os = false
-
-  initial_k3s_channel = "v1.24"
+  enable_traefik        = false
+  enable_metrics_server = false
 
   enable_cert_manager = true
-
   cert_manager_values = <<EOT
 installCRDs: true
 featureGates: ExperimentalGatewayAPISupport=true
