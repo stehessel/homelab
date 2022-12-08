@@ -33,6 +33,7 @@ tasks:
     desc: Turn up the cluster and bootstrap fluxcd
 
   destroy:
+    aliases: [down]
     deps:
       - terraform:destroy
     desc: Destroy the cluster
