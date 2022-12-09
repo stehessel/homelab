@@ -85,12 +85,15 @@
           inherit (self.checks.${system}.pre-commit-check) shellHook;
 
           buildInputs = [
+            pkgs.cmctl
             pkgs.fluxcd
             pkgs.go-task
             pkgs.hcloud
-            pkgs.hello
+            pkgs.httpie
+            pkgs.istioctl
             pkgs.kubeconform
             pkgs.kustomize
+            pkgs.linkerd
             pkgs.terraform
             pkgs.yq-go
           ];
