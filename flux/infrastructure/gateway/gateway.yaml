@@ -28,3 +28,15 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: stehessel-org-tls
+    - name: syncthing-tcp
+      protocol: TCP
+      port: 22000
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: syncthing-udp
+      protocol: UDP
+      port: 22000
+      allowedRoutes:
+        namespaces:
+          from: All

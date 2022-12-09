@@ -65,6 +65,24 @@ installCRDs: true
 featureGates: ExperimentalGatewayAPISupport=true
   EOT
 
+  extra_firewall_rules = [
+    # Syncthing
+    {
+      direction       = "in"
+      protocol        = "tcp"
+      port            = "22000"
+      source_ips      = ["0.0.0.0/0", "::/0"]
+      destination_ips = []
+    },
+    {
+      direction       = "in"
+      protocol        = "udp"
+      port            = "22"
+      source_ips      = ["0.0.0.0/0", "::/0"]
+      destination_ips = []
+    }
+  ]
+
   # Don't create a local kubeconfig file. For backwards compatibility this is set to true by default in the module but for automatic runs this can cause issues.
   # See https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner/issues/349
   # The kubeconfig file can instead be created by executing: "terraform output --raw kubeconfig > cluster_kubeconfig.yaml"

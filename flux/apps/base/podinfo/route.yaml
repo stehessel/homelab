@@ -20,7 +20,6 @@ spec:
         - name: podinfo
           namespace: podinfo
           port: 9898
-          weight: 1
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
@@ -42,4 +41,3 @@ spec:
         - name: podinfo
           namespace: podinfo
           port: 9898
-          weight: 1
