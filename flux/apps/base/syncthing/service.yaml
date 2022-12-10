@@ -8,6 +8,17 @@ spec:
   selector:
     app.kubernetes.io/name: syncthing
   ports:
-    - protocol: TCP
+    - name: ui
+      protocol: TCP
       port: 8384
-      targetPort: 8384
+      targetPort: ui
+
+    - name: sync-tcp
+      protocol: TCP
+      port: 22000
+      targetPort: sync
+
+    - name: sync-udp
+      protocol: UDP
+      port: 22000
+      targetPort: sync

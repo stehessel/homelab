@@ -19,6 +19,9 @@ spec:
           image: syncthing/syncthing
           ports:
             - containerPort: 8384
+              name: ui
+            - containerPort: 22000
+              name: sync
           volumeMounts:
             - mountPath: /var/syncthing
               name: syncthing-volume
