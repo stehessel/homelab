@@ -3,22 +3,22 @@ kind: Deployment
 metadata:
   name: syncthing
   labels:
-    app: syncthing
+    app.kubernetes.io/name: syncthing
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: syncthing
+      app.kubernetes.io/name: syncthing
   template:
     metadata:
       labels:
-        app: syncthing
+        app.kubernetes.io/name: syncthing
     spec:
       containers:
         - name: syncthing
           image: syncthing/syncthing
           ports:
-            - containerPort: 80
+            - containerPort: 8384
           volumeMounts:
             - mountPath: /var/syncthing
               name: syncthing-volume

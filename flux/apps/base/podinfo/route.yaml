@@ -18,8 +18,8 @@ spec:
             port: 443
       matches:
         - path:
-            type: Exact
-            value: /
+            type: PathPrefix
+            value: /podinfo
       backendRefs:
         - name: podinfo
           namespace: podinfo
@@ -39,8 +39,8 @@ spec:
   rules:
     - matches:
         - path:
-            type: Exact
-            value: /
+            type: PathPrefix
+            value: /podinfo
       backendRefs:
         - name: podinfo
           namespace: podinfo
