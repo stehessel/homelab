@@ -12,6 +12,8 @@ spec:
       protocol: HTTP
       port: 80
       allowedRoutes:
+        kinds:
+          - kind: HTTPRoute
         namespaces:
           from: All
     - name: https
@@ -19,6 +21,8 @@ spec:
       protocol: HTTPS
       port: 443
       allowedRoutes:
+        kinds:
+          - kind: HTTPRoute
         namespaces:
           from: Selector
           selector:
@@ -32,11 +36,21 @@ spec:
       protocol: TCP
       port: 22000
       allowedRoutes:
+        kinds:
+          - kind: TCPRoute
         namespaces:
-          from: All
+          from: Selector
+          selector:
+            matchLabels:
+              gateway-access: "true"
     - name: syncthing-udp
       protocol: UDP
       port: 22000
       allowedRoutes:
+        kinds:
+          - kind: UDPRoute
         namespaces:
-          from: All
+          from: Selector
+          selector:
+            matchLabels:
+              gateway-access: "true"

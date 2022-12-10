@@ -16,6 +16,10 @@ spec:
             scheme: https
             statusCode: 301
             port: 443
+      matches:
+        - path:
+            type: Exact
+            value: /
       backendRefs:
         - name: podinfo
           namespace: podinfo
