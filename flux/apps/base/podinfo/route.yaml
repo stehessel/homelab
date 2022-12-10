@@ -8,7 +8,7 @@ spec:
       namespace: ingress
       sectionName: http
   hostnames:
-    - stehessel.org
+    - podinfo.stehessel.org
   rules:
     - filters:
         - type: RequestRedirect
@@ -19,7 +19,7 @@ spec:
       matches:
         - path:
             type: PathPrefix
-            value: /podinfo
+            value: /
       backendRefs:
         - name: podinfo
           namespace: podinfo
@@ -35,12 +35,12 @@ spec:
       namespace: ingress
       sectionName: https
   hostnames:
-    - stehessel.org
+    - podinfo.stehessel.org
   rules:
     - matches:
         - path:
             type: PathPrefix
-            value: /podinfo
+            value: /
       backendRefs:
         - name: podinfo
           namespace: podinfo
