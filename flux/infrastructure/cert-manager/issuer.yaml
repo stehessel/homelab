@@ -1,6 +1,24 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    email: accounts@stehessel.de
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    solvers:
+      - http01:
+          gatewayHTTPRoute:
+            parentRefs:
+              - name: gateway
+                namespace: ingress
+                kind: Gateway
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
   name: letsencrypt
 spec:
   acme:
