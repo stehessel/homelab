@@ -94,6 +94,8 @@
             pkgs.kubeconform
             pkgs.kustomize
             pkgs.linkerd
+            pkgs.nushell
+            pkgs.sops
             pkgs.terraform
             pkgs.yq-go
           ];

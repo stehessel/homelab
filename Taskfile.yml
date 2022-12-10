@@ -24,12 +24,18 @@ tasks:
     internal: true
     desc: Install Istio with minimal capabilities
 
+  dns:update:
+    cmds:
+      - ./scripts/update-dns.nu terraform/hetzner/secrets/base.yaml stehessel.org
+    desc: Create DNS record for the load balancer
+
   up:
     cmds:
       - task: terraform:init
       - task: terraform:apply
       - task: flux:bootstrap
-      # - task: istio:install
+      - task: istio:install
+      - task: dns:update
     desc: Turn up the cluster and bootstrap fluxcd
 
   destroy:
