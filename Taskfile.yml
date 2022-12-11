@@ -15,8 +15,12 @@ tasks:
         --branch=master
         --personal
         --token-auth
-    internal: true
-    desc: Bootstrap fluxcd operator
+    desc: Bootstrap fluxcd
+
+  flux:upgrade:
+    cmds:
+      - flux install --export > ./flux/clusters/k3s/flux-system/gotk-components.yaml
+    desc: Upgrade fluxcd
 
   istio:install:
     cmds:
