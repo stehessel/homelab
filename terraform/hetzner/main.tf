@@ -14,16 +14,16 @@ module "kube-hetzner" {
 
   source = "kube-hetzner/kube-hetzner/hcloud"
 
-  ssh_public_key  = file(var.hcloud_ssh_public_key_file)
-  ssh_private_key = file(var.hcloud_ssh_private_key_file)
+  ssh_public_key  = data.sops_file.secrets.data["ssh.hcloud.public"]
+  ssh_private_key = data.sops_file.secrets.data["ssh.hcloud.private"]
 
   network_region = "eu-central"
 
   control_plane_nodepools = [
     {
-      name        = "control-plane-nbg1",
-      server_type = "cpx11",
-      location    = "nbg1",
+      name        = "control-plane-fsn1",
+      server_type = "cax11",
+      location    = "fsn1",
       labels      = [],
       taints      = [],
       count       = 1
@@ -32,56 +32,81 @@ module "kube-hetzner" {
 
   agent_nodepools = [
     {
-      name        = "agent-nbg1",
-      server_type = "cpx21",
-      location    = "nbg1",
+      name        = "agent-fsn1",
+      server_type = "cax11",
+      location    = "fsn1",
       labels = [
         "node.kubernetes.io/server-usage=storage"
       ],
       taints = [],
-      count  = 1
+      count  = 2
     }
   ]
 
   allow_scheduling_on_control_plane = false
   automatically_upgrade_os          = false
-  initial_k3s_channel               = "v1.24"
+  initial_k3s_channel               = "stable"
 
+  # Networking
   load_balancer_type     = "lb11"
-  load_balancer_location = "nbg1"
-  base_domain            = "stehessel.org"
-  cni_plugin             = "calico"
+  load_balancer_location = "fsn1"
+  # base_domain            = "stehessel.org"
+  ingress_controller = "none"
+  cni_plugin         = "cilium"
+  cilium_values      = <<EOT
+ipam:
+  operator:
+    clusterPoolIPv4PodCIDRList:
+      - "10.42.0.0/16"
+devices: eth1
 
-  enable_longhorn        = true
+gatewayAPI:
+  enable: true
+kubeProxyReplacement: strict
+  EOT
+  # nodeinit:
+  #   enabled: true
+  #
+  # hubble:
+  #   relay:
+  #     enabled: true
+  #   ui:
+  #     enabled: true
+
+  # Storage
+  enable_longhorn        = false
   longhorn_replica_count = 1
   disable_hetzner_csi    = true
 
-  enable_traefik        = false
+  # Metrics
   enable_metrics_server = false
 
+  # Certificates
   enable_cert_manager = true
   cert_manager_values = <<EOT
+image:
+  repository: quay.io/jetstack/cert-manager-controller-arm
 installCRDs: true
 featureGates: ExperimentalGatewayAPISupport=true
   EOT
 
-  extra_firewall_rules = [
-    # Syncthing
-    {
-      direction       = "in"
-      protocol        = "tcp"
-      port            = "22000"
-      source_ips      = ["0.0.0.0/0", "::/0"]
-      destination_ips = []
-    },
-    {
-      direction       = "in"
-      protocol        = "udp"
-      port            = "22"
-      source_ips      = ["0.0.0.0/0", "::/0"]
-      destination_ips = []
-    }
-  ]
+  # extra_firewall_rules = [
+  #   # Syncthing
+  #   {
+  #     direction       = "in"
+  #     protocol        = "tcp"
+  #     port            = "22000"
+  #     source_ips      = ["0.0.0.0/0", "::/0"]
+  #     destination_ips = []
+  #   },
+  #   {
+  #     direction       = "in"
+  #     protocol        = "udp"
+  #     port            = "22"
+  #     source_ips      = ["0.0.0.0/0", "::/0"]
+  #     destination_ips = []
+  #   }
+  # ]
 
   # Don't create a local kubeconfig file. For backwards compatibility this is set to true by default in the module but for automatic runs this can cause issues.
   # See https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner/issues/349

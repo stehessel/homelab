@@ -1,14 +1,14 @@
 terraform {
-  required_version = ">= 1.2.0"
+  required_version = ">= 1.3.3"
   required_providers {
     # Hetzner
     hcloud = {
       source  = "hetznercloud/hcloud"
-      version = "~> 1.35.1"
+      version = ">= 1.38.2"
     }
     sops = {
       source  = "carlpett/sops"
-      version = "~> 0.5"
+      version = "~> 0.7.2"
     }
   }
   backend "s3" {

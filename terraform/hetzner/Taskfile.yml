@@ -3,10 +3,9 @@ version: "3"
 tasks:
   init:
     cmds:
-      - terraform init
+      - terraform init -upgrade
         -backend-config="access_key=$(sops --decrypt --extract '["backblaze"]["keyID"]' secrets/base.yaml)"
         -backend-config="secret_key=$(sops --decrypt --extract '["backblaze"]["applicationKey"]' secrets/base.yaml)"
-      # - terraform init
     desc: Init terraform with backblaze backend
 
   apply:

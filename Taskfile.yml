@@ -6,6 +6,13 @@ includes:
     taskfile: ./terraform/hetzner
 
 tasks:
+  hetzner:snapshot:
+    cmds:
+      - curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/packer-template/hcloud-microos-snapshots.pkr.hcl -o "hcloud-microos-snapshots.pkr.hcl"
+      - cmd: packer build hcloud-microos-snapshots.pkr.hcl
+        ignore_error: true
+    desc: Build MicroOS snapshots
+
   flux:bootstrap:
     cmds:
       - flux bootstrap github
@@ -22,12 +29,6 @@ tasks:
       - flux install --export > ./flux/clusters/k3s/flux-system/gotk-components.yaml
     desc: Upgrade fluxcd
 
-  istio:install:
-    cmds:
-      - istioctl install --set profile=minimal -y
-    internal: true
-    desc: Install Istio with minimal capabilities
-
   dns:update:
     cmds:
       - ./scripts/update-dns.nu terraform/hetzner/secrets/base.yaml stehessel.org
@@ -35,10 +36,10 @@ tasks:
 
   up:
     cmds:
+      - task: hetzner:snapshot
       - task: terraform:init
       - task: terraform:apply
       - task: flux:bootstrap
-      - task: istio:install
       - task: dns:update
     desc: Turn up the cluster and bootstrap fluxcd
 
