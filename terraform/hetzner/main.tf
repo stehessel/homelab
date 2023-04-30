@@ -63,15 +63,16 @@ devices: eth1
 gatewayAPI:
   enable: true
 kubeProxyReplacement: strict
+
+hubble:
+  relay:
+    enabled: true
+  ui:
+    enabled: true
   EOT
   # nodeinit:
   #   enabled: true
   #
-  # hubble:
-  #   relay:
-  #     enabled: true
-  #   ui:
-  #     enabled: true
 
   # Storage
   enable_longhorn        = false
