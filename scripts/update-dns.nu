@@ -1,20 +1,14 @@
 #!/usr/bin/env nu
 
 module k8s {
-  export def wait-load-balancer [name: string, namespace: string] {
-    let ingress = (
-      kubectl get service $name -n $namespace -o json
+  export def get-ingress-ip [namespace: string] {
+    let ip = (
+      kubectl get services -n ingress -o jsonpath='{$.items[?(@.spec.type=="LoadBalancer")]}'
         | from json
         | get status.loadBalancer.ingress
+        | where not ip starts-with "10."
     )
-    if ($ingress | is-empty) { sleep 5sec; wait-load-balancer $name $namespace } else {}
-  }
-
-  export def get-ingress-ip [name: string, namespace: string] {
-    kubectl get service $name -n $namespace -o json
-      | from json
-      | get status.loadBalancer.ingress
-      | where not ip starts-with "10."
+    if ($ip | is-empty) { sleep 5sec; get-ingress-ip $namespace } else $ip
   }
 }
 
@@ -92,7 +86,8 @@ module porkbun {
         | insert "sub" $sub
         | merge $delete_resp
         | merge $create_resp
-      } | flatten
+      }
+        | flatten
     }
 }
 
@@ -100,13 +95,13 @@ def main [secret_file: string, hostname: string] {
   use k8s *
   use porkbun *
 
-  wait-load-balancer "gateway" "ingress"
-  let ip = get-ingress-ip "gateway" "ingress"
+  let ip = get-ingress-ip "ingress"
 
   let type = get_record_type $ip
   let ip = ($ip | merge $type)
+  $ip
 
-  let subdomains = ["", "*"]
+  let subdomains = ["", "podinfo"]
   let api_key = (sops --decrypt --extract '["porkbun"]["apiKey"]' $secret_file)
   let secret_key = (sops --decrypt --extract '["porkbun"]["secretKey"]' $secret_file)
   update_dns $hostname $subdomains $ip $api_key $secret_key

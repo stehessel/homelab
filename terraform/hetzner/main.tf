@@ -33,7 +33,7 @@ module "kube-hetzner" {
   agent_nodepools = [
     {
       name        = "agent-fsn1",
-      server_type = "cax11",
+      server_type = "cax21",
       location    = "fsn1",
       labels = [
         "node.kubernetes.io/server-usage=storage"
@@ -53,26 +53,6 @@ module "kube-hetzner" {
   # base_domain            = "stehessel.org"
   ingress_controller = "none"
   cni_plugin         = "cilium"
-  cilium_values      = <<EOT
-ipam:
-  operator:
-    clusterPoolIPv4PodCIDRList:
-      - "10.42.0.0/16"
-devices: eth1
-
-gatewayAPI:
-  enable: true
-kubeProxyReplacement: strict
-
-hubble:
-  relay:
-    enabled: true
-  ui:
-    enabled: true
-  EOT
-  # nodeinit:
-  #   enabled: true
-  #
 
   # Storage
   enable_longhorn        = false

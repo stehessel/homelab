@@ -95,6 +95,7 @@
             pkgs.kustomize
             pkgs.linkerd
             pkgs.nushell
+            pkgs.packer
             pkgs.sops
             pkgs.terraform
             pkgs.yq-go
