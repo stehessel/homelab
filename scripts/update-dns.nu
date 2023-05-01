@@ -101,7 +101,7 @@ def main [secret_file: string, hostname: string] {
   let ip = ($ip | merge $type)
   $ip
 
-  let subdomains = ["", "podinfo"]
+  let subdomains = ["", "podinfo", "syncthing"]
   let api_key = (sops --decrypt --extract '["porkbun"]["apiKey"]' $secret_file)
   let secret_key = (sops --decrypt --extract '["porkbun"]["secretKey"]' $secret_file)
   update_dns $hostname $subdomains $ip $api_key $secret_key

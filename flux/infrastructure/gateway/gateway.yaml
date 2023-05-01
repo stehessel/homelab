@@ -15,7 +15,6 @@ spec:
         namespaces:
           from: All
     - name: https
-      hostname: stehessel.org
       protocol: HTTPS
       port: 443
       allowedRoutes:
@@ -28,27 +27,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: stehessel-org-tls
-    - name: http-wildcard
-      hostname: "*.stehessel.org"
-      protocol: HTTP
-      port: 80
-      allowedRoutes:
-        namespaces:
-          from: All
-    - name: https-wildcard
-      hostname: "*.stehessel.org"
-      protocol: HTTPS
-      port: 443
-      allowedRoutes:
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              gateway-access: "true"
-      tls:
-        mode: Terminate
-        certificateRefs:
-          - name: wildcard-stehessel-org-tls
     - name: syncthing-tcp
       protocol: TCP
       port: 22000
