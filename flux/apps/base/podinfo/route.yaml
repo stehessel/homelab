@@ -6,11 +6,15 @@ spec:
   parentRefs:
     - name: gateway
       namespace: ingress
-      sectionName: http
+      # sectionName: http
   hostnames:
-    - stehessel.org
+    - podinfo.stehessel.org
   rules:
-    - filters:
+    - backendRefs:
+        - name: podinfo
+          namespace: podinfo
+          port: 9898
+      filters:
         - type: RequestRedirect
           requestRedirect:
             scheme: https
@@ -20,10 +24,6 @@ spec:
         - path:
             type: PathPrefix
             value: /
-      backendRefs:
-        - name: podinfo
-          namespace: podinfo
-          port: 9898
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
@@ -33,15 +33,15 @@ spec:
   parentRefs:
     - name: gateway
       namespace: ingress
-      sectionName: https
+      # sectionName: https
   hostnames:
-    - stehessel.org
+    - podinfo.stehessel.org
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /
-      backendRefs:
+    - backendRefs:
         - name: podinfo
           namespace: podinfo
           port: 9898
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

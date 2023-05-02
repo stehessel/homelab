@@ -9,37 +9,46 @@ spec:
   gatewayClassName: cilium
   listeners:
     - name: http
+      hostname: podinfo.stehessel.org
       protocol: HTTP
       port: 80
+      allowedRoutes:
+        namespaces:
+          from: All
+          # from: Selector
+          # selector:
+          #   matchLabels:
+          #     gateway-access: "true"
     - name: https
-      hostname: stehessel.org
+      hostname: podinfo.stehessel.org
       protocol: HTTPS
       port: 443
       allowedRoutes:
         namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              gateway-access: "true"
+          from: All
+          # from: Selector
+          # selector:
+          #   matchLabels:
+          #     gateway-access: "true"
       tls:
         mode: Terminate
         certificateRefs:
           - name: stehessel-org-tls
-    - name: syncthing-tcp
-      protocol: TCP
-      port: 22000
-      allowedRoutes:
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              gateway-access: "true"
-    - name: syncthing-udp
-      protocol: UDP
-      port: 22000
-      allowedRoutes:
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              gateway-access: "true"
+    # - name: syncthing-tcp
+    #   protocol: TCP
+    #   port: 22000
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: Selector
+    #       selector:
+    #         matchLabels:
+    #           gateway-access: "true"
+    # - name: syncthing-udp
+    #   protocol: UDP
+    #   port: 22000
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: Selector
+    #       selector:
+    #         matchLabels:
+    #           gateway-access: "true"

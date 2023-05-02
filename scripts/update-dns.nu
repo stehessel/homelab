@@ -9,6 +9,9 @@ module k8s {
     let lb = if ($lb | is-empty) {
       sleep 5sec
       get-ingress-ip $namespace
+    } else if ($lb | select status.loadBalancer.ingress | is-empty) {
+      sleep 5sec
+      get-ingress-ip $namespace
     } else $lb
     $lb
       | get status.loadBalancer.ingress

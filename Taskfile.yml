@@ -29,6 +29,17 @@ tasks:
       - flux install --export > ./flux/clusters/k3s/flux-system/gotk-components.yaml
     desc: Upgrade fluxcd
 
+  cilium:install:
+    cmds:
+      - helm uninstall cilium -n kube-system
+      - helm upgrade cilium cilium/cilium --install --version 1.13.2 --namespace kube-system --set kubeProxyReplacement=strict --set devices='eth1' --set hubble.relay.enabled=true  --set hubble.ui.enabled=true --set gatewayAPI.enabled=true --set ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16"
+    desc: Install Cilium
+
+  contour:install:
+    cmds:
+      - kubectl apply -f https://projectcontour.io/quickstart/contour-gateway-provisioner.yaml
+    desc: Install Contour
+
   dns:update:
     cmds:
       - ./scripts/update-dns.nu terraform/hetzner/secrets/base.yaml stehessel.org
@@ -40,6 +51,7 @@ tasks:
       - task: terraform:init
       - task: terraform:apply
       - task: flux:bootstrap
+      - task: cilium:install
       - task: dns:update
     desc: Turn up the cluster and bootstrap fluxcd
 
