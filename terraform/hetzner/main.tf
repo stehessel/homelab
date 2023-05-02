@@ -55,7 +55,7 @@ module "kube-hetzner" {
   cni_plugin         = "cilium"
 
   # Storage
-  enable_longhorn        = false
+  enable_longhorn        = true
   longhorn_replica_count = 1
   disable_hetzner_csi    = true
 

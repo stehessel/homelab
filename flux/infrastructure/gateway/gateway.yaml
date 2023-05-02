@@ -15,6 +15,7 @@ spec:
         namespaces:
           from: All
     - name: https
+      hostname: "*.stehessel.org"
       protocol: HTTPS
       port: 443
       allowedRoutes:

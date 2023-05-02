@@ -2,13 +2,17 @@
 
 module k8s {
   export def get-ingress-ip [namespace: string] {
-    let ip = (
+    let lb = (
       kubectl get services -n ingress -o jsonpath='{$.items[?(@.spec.type=="LoadBalancer")]}'
         | from json
-        | get status.loadBalancer.ingress
-        | where not ip starts-with "10."
     )
-    if ($ip | is-empty) { sleep 5sec; get-ingress-ip $namespace } else $ip
+    let lb = if ($lb | is-empty) {
+      sleep 5sec
+      get-ingress-ip $namespace
+    } else $lb
+    $lb
+      | get status.loadBalancer.ingress
+      | where not ip starts-with "10."
   }
 }
 
