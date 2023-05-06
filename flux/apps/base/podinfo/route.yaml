@@ -20,10 +20,6 @@ spec:
             scheme: https
             statusCode: 301
             port: 443
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
@@ -41,7 +37,3 @@ spec:
         - name: podinfo
           namespace: podinfo
           port: 9898
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
