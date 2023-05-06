@@ -6,7 +6,7 @@ spec:
   parentRefs:
     - name: gateway
       namespace: ingress
-      # sectionName: http
+      sectionName: http
   hostnames:
     - podinfo.stehessel.org
   rules:
@@ -29,7 +29,7 @@ spec:
   parentRefs:
     - name: gateway
       namespace: ingress
-      # sectionName: https
+      sectionName: https
   hostnames:
     - podinfo.stehessel.org
   rules:
