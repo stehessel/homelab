@@ -4,7 +4,7 @@ metadata:
   name: gateway
   namespace: ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   gatewayClassName: cilium
   listeners:
