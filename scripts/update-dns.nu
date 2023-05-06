@@ -3,19 +3,13 @@
 module k8s {
   export def get-ingress-ip [namespace: string] {
     let lb = (
-      kubectl get services -n ingress -o jsonpath='{$.items[?(@.spec.type=="LoadBalancer")]}'
+      kubectl get services -n ingress -o jsonpath='{$.items[?(@.spec.type=="LoadBalancer")].status.loadBalancer.ingress}'
         | from json
     )
-    let lb = if ($lb | is-empty) {
+    if ($lb | is-empty) {
       sleep 5sec
       get-ingress-ip $namespace
-    } else if ($lb | select status.loadBalancer.ingress | is-empty) {
-      sleep 5sec
-      get-ingress-ip $namespace
-    } else $lb
-    $lb
-      | get status.loadBalancer.ingress
-      | where not ip starts-with "10."
+    } else $lb | where not ip starts-with "10."
   }
 }
 
@@ -77,15 +71,15 @@ module porkbun {
     secret_key: string,
   ] {
     let url = "https://porkbun.com/api/json/v3/dns"
-    $subdomains | each { |sub|
+    $subdomains | par-each { |sub|
       let delete_resp = (
         $ip
-          | each { |it| delete_dns $url $hostname $sub $it.type $api_key $secret_key }
+          | par-each { |it| delete_dns $url $hostname $sub $it.type $api_key $secret_key }
           | wrap "delete-response"
       )
       let create_resp = (
         $ip
-          | each { |it| create_dns $url $hostname $sub $it.ip $it.type $api_key $secret_key }
+          | par-each { |it| create_dns $url $hostname $sub $it.ip $it.type $api_key $secret_key }
           | wrap "create-response"
       )
 
