@@ -14,4 +14,3 @@ spec:
     provider: sops
     secretRef:
       name: sops-keys
-      namespace: flux-system
