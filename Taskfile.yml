@@ -24,6 +24,11 @@ tasks:
         --token-auth
     desc: Bootstrap fluxcd
 
+  flux:sops:
+    cmds:
+      - sops --decrypt --extract '["flux"]["sops"]' ./terraform/hetzner/secrets/base.yaml | kubectl apply -f -
+    desc: Create fluxcd SOPS secret
+
   flux:upgrade:
     cmds:
       - flux install --export > ./flux/clusters/k3s/flux-system/gotk-components.yaml
@@ -46,6 +51,7 @@ tasks:
       - task: terraform:init
       - task: terraform:apply
       - task: flux:bootstrap
+      - task: flux:sops
       - task: cilium:install
     desc: Turn up the cluster and bootstrap fluxcd
 
