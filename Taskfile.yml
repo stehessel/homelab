@@ -50,8 +50,8 @@ tasks:
       - task: hetzner:snapshot
       - task: terraform:init
       - task: terraform:apply
-      - task: flux:bootstrap
       - task: flux:sops
+      - task: flux:bootstrap
       - task: cilium:install
     desc: Turn up the cluster and bootstrap fluxcd
 
