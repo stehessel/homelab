@@ -37,6 +37,7 @@ tasks:
   cilium:install:
     cmds:
       - helm uninstall cilium -n kube-system
+      - kubectl wait --for=delete namespace cilium-secrets --timeout=60s
       - helm upgrade cilium cilium/cilium --install --version 1.13.2 --namespace kube-system --set kubeProxyReplacement=strict --set devices='eth1' --set hubble.relay.enabled=true  --set hubble.ui.enabled=true --set gatewayAPI.enabled=true --set ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16"
     desc: Install Cilium
 
@@ -50,8 +51,8 @@ tasks:
       - task: hetzner:snapshot
       - task: terraform:init
       - task: terraform:apply
-      - task: flux:sops
       - task: flux:bootstrap
+      - task: flux:sops
       - task: cilium:install
     desc: Turn up the cluster and bootstrap fluxcd
 

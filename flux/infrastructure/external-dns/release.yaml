@@ -21,5 +21,8 @@ spec:
   # https://artifacthub.io/packages/helm/bitnami/external-dns
   values:
     cloudflare:
+      email: accounts@stehessel.de
       secretName: cloudflare-dns
     provider: cloudflare
+    sources:
+      - gateway-httproute
