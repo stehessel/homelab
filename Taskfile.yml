@@ -40,11 +40,6 @@ tasks:
       - kubectl apply -f https://projectcontour.io/quickstart/contour-gateway-provisioner.yaml
     desc: Install Contour
 
-  dns:update:
-    cmds:
-      - ./scripts/update-dns.nu terraform/hetzner/secrets/base.yaml stehessel.org
-    desc: Create DNS record for the load balancer
-
   up:
     cmds:
       - task: hetzner:snapshot
@@ -52,7 +47,6 @@ tasks:
       - task: terraform:apply
       - task: flux:bootstrap
       - task: cilium:install
-      - task: dns:update
     desc: Turn up the cluster and bootstrap fluxcd
 
   destroy:
