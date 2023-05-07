@@ -3,5 +3,4 @@ kind: Kustomization
 namespace: ingress
 resources:
   - gateway.yaml
-  # - gatewayclass.yaml
   - namespace.yaml

@@ -4,7 +4,7 @@ metadata:
   name: gateway
   namespace: ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   gatewayClassName: cilium
   listeners:
@@ -25,11 +25,10 @@ spec:
       port: 443
       allowedRoutes:
         namespaces:
-          from: All
-          # from: Selector
-          # selector:
-          #   matchLabels:
-          #     gateway-access: "true"
+          from: Selector
+          selector:
+            matchLabels:
+              gateway-access: "true"
       tls:
         mode: Terminate
         certificateRefs:
