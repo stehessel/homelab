@@ -11,6 +11,9 @@ spec:
           - 10.42.0.0/16
     devices: eth1
 
+    operator:
+      replicas: 1
+
     gatewayAPI:
       enable: true
     kubeProxyReplacement: strict
