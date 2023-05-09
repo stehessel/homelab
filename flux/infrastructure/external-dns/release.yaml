@@ -22,6 +22,7 @@ spec:
   values:
     cloudflare:
       email: accounts@stehessel.de
+      proxied: false
       secretName: cloudflare-dns
     provider: cloudflare
     sources:
