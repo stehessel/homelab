@@ -10,20 +10,16 @@ spec:
   hostnames:
     - syncthing.stehessel.org
   rules:
-    - filters:
+    - backendRefs:
+        - name: syncthing
+          namespace: syncthing
+          port: 8384
+      filters:
         - type: RequestRedirect
           requestRedirect:
             scheme: https
             statusCode: 301
             port: 443
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
-      backendRefs:
-        - name: syncthing
-          namespace: syncthing
-          port: 8384
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
@@ -37,11 +33,7 @@ spec:
   hostnames:
     - syncthing.stehessel.org
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /
-      backendRefs:
+    - backendRefs:
         - name: syncthing
           namespace: syncthing
           port: 8384

@@ -29,21 +29,21 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: stehessel-org-tls
-    # - name: syncthing-tcp
-    #   protocol: TCP
-    #   port: 22000
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: Selector
-    #       selector:
-    #         matchLabels:
-    #           gateway-access: "true"
-    # - name: syncthing-udp
-    #   protocol: UDP
-    #   port: 22000
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: Selector
-    #       selector:
-    #         matchLabels:
-    #           gateway-access: "true"
+    - name: syncthing-tcp
+      protocol: TCP
+      port: 22000
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              gateway-access: "true"
+    - name: syncthing-udp
+      protocol: UDP
+      port: 22000
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              gateway-access: "true"
