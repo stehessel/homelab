@@ -38,7 +38,7 @@ tasks:
     cmds:
       - helm uninstall cilium -n kube-system
       - kubectl wait --for=delete namespace cilium-secrets --timeout=60s
-      - helm upgrade cilium cilium/cilium --install --version 1.13.2 --namespace kube-system --set kubeProxyReplacement=strict --set devices='eth1' --set hubble.relay.enabled=true  --set hubble.ui.enabled=true --set gatewayAPI.enabled=true --set ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16" --set ipv6.enabled=true
+      - helm upgrade cilium cilium/cilium --install --version 1.13.2 --namespace kube-system --set kubeProxyReplacement=strict --set devices='eth1' --set hubble.relay.enabled=true  --set hubble.ui.enabled=true --set gatewayAPI.enabled=true --set ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16" --set operator.replicas=1 --set ipv6.enabled=true
     desc: Install Cilium
 
   contour:install:
