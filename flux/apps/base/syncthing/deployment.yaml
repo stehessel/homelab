@@ -22,6 +22,12 @@ spec:
               name: ui
             - containerPort: 22000
               name: sync
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              memory: "2048Mi"
           volumeMounts:
             - mountPath: /var/syncthing
               name: syncthing-volume
