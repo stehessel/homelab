@@ -9,12 +9,11 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-      - http01:
-          gatewayHTTPRoute:
-            parentRefs:
-              - name: gateway
-                namespace: ingress
-                kind: Gateway
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api_token
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -27,9 +26,8 @@ spec:
     privateKeySecretRef:
       name: letsencrypt
     solvers:
-      - http01:
-          gatewayHTTPRoute:
-            parentRefs:
-              - name: gateway
-                namespace: ingress
-                kind: Gateway
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api_token

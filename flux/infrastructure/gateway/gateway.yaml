@@ -9,7 +9,6 @@ spec:
   gatewayClassName: cilium
   listeners:
     - name: http
-      hostname: "*.stehessel.org"
       protocol: HTTP
       port: 80
       allowedRoutes:
