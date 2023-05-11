@@ -5,3 +5,4 @@ resources:
   - authelia.yaml
   - bitnami.yaml
   - podinfo.yaml
+  - victoria-metrics.yaml

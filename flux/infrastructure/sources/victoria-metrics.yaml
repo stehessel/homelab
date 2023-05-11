@@ -1,7 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: podinfo
+  name: victoria-metrics
 spec:
   interval: 30m
-  url: https://stefanprodan.github.io/podinfo
+  url: https://victoriametrics.github.io/helm-charts
