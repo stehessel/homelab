@@ -4,3 +4,5 @@ namespace: victoria-metrics
 resources:
   - namespace.yaml
   - release.yaml
+  - route.yaml
+  - secret.yaml

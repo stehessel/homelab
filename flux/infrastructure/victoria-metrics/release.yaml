@@ -18,3 +18,7 @@ spec:
       retries: 3
   # Default values
   # https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-k8s-stack/README.md
+  values:
+    grafana:
+      admin:
+        existingSecret: vm-k8s-grafana
