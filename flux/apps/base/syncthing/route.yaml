@@ -1,7 +1,7 @@
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
-  name: http-filter-redirect
+  name: auth-redirect-http
 spec:
   parentRefs:
     - name: gateway
@@ -11,20 +11,21 @@ spec:
     - syncthing.stehessel.org
   rules:
     - backendRefs:
-        - name: syncthing
-          namespace: syncthing
-          port: 8384
+        - name: oauth2-proxy
+          namespace: oauth2-proxy
+          port: 80
       filters:
         - type: RequestRedirect
           requestRedirect:
-            scheme: https
-            statusCode: 301
-            port: 443
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /oauth/start
+            statusCode: 302
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
-  name: syncthing
+  name: auth-redirect-https
 spec:
   parentRefs:
     - name: gateway
@@ -34,9 +35,56 @@ spec:
     - syncthing.stehessel.org
   rules:
     - backendRefs:
-        - name: syncthing
-          namespace: syncthing
-          port: 8384
+        - name: oauth2-proxy
+          namespace: oauth2-proxy
+          port: 80
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /oauth/start
+            statusCode: 302
+# ---
+# apiVersion: gateway.networking.k8s.io/v1beta1
+# kind: HTTPRoute
+# metadata:
+#   name: http-filter-redirect
+# spec:
+#   parentRefs:
+#     - name: gateway
+#       namespace: ingress
+#       sectionName: http
+#   hostnames:
+#     - syncthing.stehessel.org
+#   rules:
+#     - backendRefs:
+#         - name: syncthing
+#           namespace: syncthing
+#           port: 8384
+#       filters:
+#         - type: RequestRedirect
+#           requestRedirect:
+#             scheme: https
+#             statusCode: 301
+#             port: 443
+# ---
+# apiVersion: gateway.networking.k8s.io/v1beta1
+# kind: HTTPRoute
+# metadata:
+#   name: syncthing
+# spec:
+#   parentRefs:
+#     - name: gateway
+#       namespace: ingress
+#       sectionName: https
+#   hostnames:
+#     - syncthing.stehessel.org
+#   rules:
+#     - backendRefs:
+#         - name: syncthing
+#           namespace: syncthing
+#           port: 8384
 ---
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TCPRoute

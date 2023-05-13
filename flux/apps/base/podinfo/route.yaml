@@ -10,11 +10,7 @@ spec:
   hostnames:
     - podinfo.stehessel.org
   rules:
-    - backendRefs:
-        - name: podinfo
-          namespace: podinfo
-          port: 9898
-      filters:
+    - filters:
         - type: RequestRedirect
           requestRedirect:
             scheme: https
