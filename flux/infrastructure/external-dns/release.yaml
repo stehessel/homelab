@@ -24,6 +24,8 @@ spec:
       email: accounts@stehessel.de
       proxied: false
       secretName: cloudflare-dns
+    extraArgs:
+      exclude-target-net: 10.0.0.0/8
     provider: cloudflare
     sources:
       - gateway-httproute
