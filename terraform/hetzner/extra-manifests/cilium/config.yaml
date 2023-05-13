@@ -9,12 +9,12 @@ spec:
       operator:
         clusterPoolIPv4PodCIDRList:
           - 10.42.0.0/16
+        clusterPoolIpv6PodCIDRList:
+          - fd42::/48
     devices: eth1
 
     operator:
       replicas: 1
-    ipv6:
-      enabled: true
 
     gatewayAPI:
       enable: true
