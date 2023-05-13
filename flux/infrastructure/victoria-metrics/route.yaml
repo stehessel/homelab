@@ -12,7 +12,7 @@ spec:
   rules:
     - backendRefs:
         - name: vm-k8s-grafana
-          namespace: victoria-metrics
+          namespace: monitoring-system
           port: 80
 # ---
 # apiVersion: gateway.networking.k8s.io/v1beta1
@@ -29,7 +29,7 @@ spec:
 #   rules:
 #     - backendRefs:
 #         - name: vmsingle-vm-k8s-victoria-metrics-k8s-stack
-#           namespace: victoria-metrics
+#           namespace: monitoring-system
 #           port: 8429
 # ---
 # apiVersion: gateway.networking.k8s.io/v1beta1
@@ -46,5 +46,5 @@ spec:
 #   rules:
 #     - backendRefs:
 #         - name: vmalert-vm-k8s-victoria-metrics-k8s-stack
-#           namespace: victoria-metrics
+#           namespace: monitoring-system
 #           port: 8080
