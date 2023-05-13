@@ -1,30 +1,6 @@
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
-  name: auth-redirect-http
-spec:
-  parentRefs:
-    - name: gateway
-      namespace: ingress
-      sectionName: http
-  hostnames:
-    - syncthing.stehessel.org
-  rules:
-    - backendRefs:
-        - name: oauth2-proxy
-          namespace: oauth2-proxy
-          port: 80
-      filters:
-        - type: RequestRedirect
-          requestRedirect:
-            path:
-              type: ReplaceFullPath
-              replaceFullPath: /oauth/start
-            statusCode: 302
----
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: HTTPRoute
-metadata:
   name: auth-redirect-https
 spec:
   parentRefs:
