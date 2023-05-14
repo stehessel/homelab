@@ -4,9 +4,9 @@ metadata:
   name: gateway
   namespace: ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
-  gatewayClassName: cilium
+  gatewayClassName: contour
   listeners:
     - name: http
       protocol: HTTP

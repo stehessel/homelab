@@ -13,6 +13,11 @@ tasks:
         ignore_error: true
     desc: Build MicroOS snapshots
 
+  crds:install:
+    cmds:
+      - kubectl apply -f https://github.com/VictoriaMetrics/operator/releases/download/v0.33.0/crd.yaml
+    desc: Install CRDs
+
   flux:bootstrap:
     cmds:
       - flux bootstrap github
@@ -44,6 +49,7 @@ tasks:
   contour:install:
     cmds:
       - kubectl apply -f https://projectcontour.io/quickstart/contour-gateway-provisioner.yaml
+      - kubectl apply -f ./flux/infrastructure/gateway/contour.yaml
     desc: Install Contour
 
   up:
@@ -51,9 +57,11 @@ tasks:
       - task: hetzner:snapshot
       - task: terraform:init
       - task: terraform:apply
+      - task: crds:install
       - task: flux:bootstrap
       - task: flux:sops
-      - task: cilium:install
+      # - task: cilium:install
+      - task: contour:install
     desc: Turn up the cluster and bootstrap fluxcd
 
   destroy:
