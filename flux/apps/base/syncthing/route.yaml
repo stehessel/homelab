@@ -1,6 +1,28 @@
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
+  name: http-redirect
+spec:
+  parentRefs:
+    - name: gateway
+      namespace: ingress
+      sectionName: http
+  hostnames:
+    - syncthing.stehessel.org
+  rules:
+    - backendRefs:
+        - name: syncthing
+          namespace: syncthing
+          port: 8384
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
   name: auth-redirect-https
 spec:
   parentRefs:
@@ -19,31 +41,8 @@ spec:
           requestRedirect:
             path:
               type: ReplaceFullPath
-              replaceFullPath: /oauth/start
+              replaceFullPath: /oauth/start?rd=https://syncthing.stehessel.org
             statusCode: 302
-# ---
-# apiVersion: gateway.networking.k8s.io/v1beta1
-# kind: HTTPRoute
-# metadata:
-#   name: http-filter-redirect
-# spec:
-#   parentRefs:
-#     - name: gateway
-#       namespace: ingress
-#       sectionName: http
-#   hostnames:
-#     - syncthing.stehessel.org
-#   rules:
-#     - backendRefs:
-#         - name: syncthing
-#           namespace: syncthing
-#           port: 8384
-#       filters:
-#         - type: RequestRedirect
-#           requestRedirect:
-#             scheme: https
-#             statusCode: 301
-#             port: 443
 # ---
 # apiVersion: gateway.networking.k8s.io/v1beta1
 # kind: HTTPRoute

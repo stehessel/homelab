@@ -1,6 +1,28 @@
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
+  name: http-redirect
+spec:
+  parentRefs:
+    - name: gateway
+      namespace: ingress
+      sectionName: http
+  hostnames:
+    - podinfo.stehessel.org
+  rules:
+    - backendRefs:
+        - name: podinfo
+          namespace: podinfo
+          port: 9898
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
   name: podinfo
 spec:
   parentRefs:
