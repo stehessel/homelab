@@ -2,6 +2,8 @@ apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
   name: http-redirect
+  labels:
+    app.kubernetes.io/name: oauth2-proxy
 spec:
   parentRefs:
     - name: gateway
@@ -11,8 +13,8 @@ spec:
     - auth.stehessel.org
   rules:
     - backendRefs:
-        - name: authelia
-          namespace: authelia
+        - name: oauth2-proxy
+          namespace: oauth2-proxy
           port: 80
       filters:
         - type: RequestRedirect
@@ -24,7 +26,9 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
-  name: authelia
+  name: oauth2-proxy
+  labels:
+    app.kubernetes.io/name: oauth2-proxy
 spec:
   parentRefs:
     - name: gateway
@@ -34,6 +38,6 @@ spec:
     - auth.stehessel.org
   rules:
     - backendRefs:
-        - name: authelia
-          namespace: authelia
+        - name: oauth2-proxy
+          namespace: oauth2-proxy
           port: 80

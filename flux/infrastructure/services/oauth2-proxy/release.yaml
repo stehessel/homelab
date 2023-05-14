@@ -3,6 +3,8 @@ kind: HelmRelease
 metadata:
   name: oauth2-proxy
   namespace: oauth2-proxy
+  labels:
+    app.kubernetes.io/name: oauth2-proxy
 spec:
   releaseName: oauth2-proxy
   chart:

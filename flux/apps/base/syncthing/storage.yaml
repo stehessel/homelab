@@ -2,6 +2,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: syncthing-pvc
+  labels:
+    app.kubernetes.io/name: syncthing
 spec:
   storageClassName: longhorn
   accessModes:

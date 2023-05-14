@@ -3,6 +3,8 @@ kind: VMServiceScrape
 metadata:
   name: cilium
   namespace: monitoring-system
+  labels:
+    app.kubernetes.io/name: victoria-metrics-operator
 spec:
   discoveryRole: "endpoints"
   jobLabel: "app.kubernetes.io/name"
