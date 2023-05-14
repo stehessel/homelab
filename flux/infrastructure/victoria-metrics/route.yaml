@@ -17,6 +17,7 @@ spec:
       filters:
         - type: RequestRedirect
           requestRedirect:
+            port: 443
             scheme: https
             statusCode: 301
 ---
@@ -56,6 +57,7 @@ spec:
       filters:
         - type: RequestRedirect
           requestRedirect:
+            port: 443
             scheme: https
             statusCode: 301
 ---
@@ -95,6 +97,7 @@ spec:
       filters:
         - type: RequestRedirect
           requestRedirect:
+            port: 443
             scheme: https
             statusCode: 301
 ---
