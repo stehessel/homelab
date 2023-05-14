@@ -37,12 +37,13 @@ spec:
           namespace: oauth2-proxy
           port: 80
       filters:
-        - type: RequestRedirect
-          requestRedirect:
+        - type: URLRewrite
+          urlRewrite:
+            hostname: auth.stehessel.org
             path:
               type: ReplaceFullPath
-              replaceFullPath: /oauth/start?rd=https://syncthing.stehessel.org
-            statusCode: 302
+              replaceFullPath: /oauth/start?rd=https://podinfo.stehessel.org
+            # statusCode: 302
 # ---
 # apiVersion: gateway.networking.k8s.io/v1beta1
 # kind: HTTPRoute

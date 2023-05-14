@@ -5,12 +5,13 @@ metadata:
   namespace: oauth2-proxy
 data:
   oauth2_proxy.cfg: |
-    email_domains="*"
-    http_address="0.0.0.0:4180"
+    email_domains = "*"
+    http_address = "0.0.0.0:4180"
     https_address = ":443"
-    provider="github"
-    redirect_url="https://auth.stehessel.org/oauth/callback"
-    # upstreams="podinfo.podinfo.svc.cluster.local:9898"
-    upstreams=[ "file:///dev/null" ]
-    cookie_domains=".stehessel.org"
-    whitelist_domains=".stehessel.org"
+    reverse_proxy = true
+    provider = "github"
+    redirect_url = "https://auth.stehessel.org/oauth/callback"
+    # upstreams = "podinfo.podinfo.svc.cluster.local:9898"
+    upstreams = [ "https://podinfo.stehessel.org" ]
+    cookie_domains = ".stehessel.org"
+    whitelist_domains = ".stehessel.org"
