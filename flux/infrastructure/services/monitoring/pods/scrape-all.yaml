@@ -1,0 +1,33 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMPodScrape
+metadata:
+  name: scrape-all
+  namespace: monitoring-system
+  labels:
+    app.kubernetes.io/name: victoria-metrics-operator
+spec:
+  jobLabel: "app.kubernetes.io/name"
+  podMetricsEndpoints:
+    - path: /metrics
+      scheme: http
+      relabelConfigs:
+        - sourceLabels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: "true"
+        - sourceLabels: [__meta_kubernetes_pod_annotation_prometheus_io_scheme]
+          action: replace
+          targetLabel: __scheme__
+          regex: (https?)
+        - sourceLabels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          action: replace
+          targetLabel: __metrics_path__
+          regex: (.+)
+        - sourceLabels:
+            [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          targetLabel: __address__
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+  namespaceSelector:
+    any: true
+  selector: {}
