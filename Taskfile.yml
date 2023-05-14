@@ -52,6 +52,11 @@ tasks:
       - kubectl apply -f ./flux/infrastructure/gateway/contour.yaml
     desc: Install Contour
 
+  istio:install:
+    cmds:
+      - istioctl install --set profile=minimal -y
+    desc: Install Istio with minimal capabilities
+
   up:
     cmds:
       - task: hetzner:snapshot
@@ -61,7 +66,8 @@ tasks:
       - task: flux:bootstrap
       - task: flux:sops
       # - task: cilium:install
-      - task: contour:install
+      # - task: contour:install
+      - task: istio:install
     desc: Turn up the cluster and bootstrap fluxcd
 
   destroy:
