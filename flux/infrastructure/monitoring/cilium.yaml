@@ -1,0 +1,16 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: cilium
+  namespace: monitoring-system
+spec:
+  discoveryRole: "endpoints"
+  jobLabel: "app.kubernetes.io/name"
+  endpoints:
+    - port: envoy-metrics
+    - port: hubble-metrics
+  namespaceSelector:
+    any: true
+  selector:
+    matchLabels:
+      k8s-app: cilium
