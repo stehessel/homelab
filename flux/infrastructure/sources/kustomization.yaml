@@ -4,6 +4,7 @@ namespace: flux-system
 resources:
   - authelia.yaml
   - bitnami.yaml
+  - istio.yaml
   - oauth2-proxy.yaml
   - podinfo.yaml
   - victoria-metrics.yaml

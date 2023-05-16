@@ -67,7 +67,7 @@ tasks:
       - task: flux:sops
       # - task: cilium:install
       # - task: contour:install
-      - task: istio:install
+      # - task: istio:install
     desc: Turn up the cluster and bootstrap fluxcd
 
   destroy:
