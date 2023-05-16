@@ -4,6 +4,6 @@ namespace: syncthing
 resources:
   - deployment.yaml
   - namespace.yaml
-  - route.yaml
+  # - route.yaml
   - service.yaml
   - storage.yaml

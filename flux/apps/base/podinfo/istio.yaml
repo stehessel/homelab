@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: podinfo
+spec:
+  hosts:
+    - "podinfo.stehessel.com"
+  gateways:
+    - gateway
+  http:
+    - route:
+        - destination:
+            host: podinfo.podinfo.svc.cluster.local
+            port:
+              number: 9898

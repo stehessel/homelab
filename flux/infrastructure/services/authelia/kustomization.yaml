@@ -4,4 +4,4 @@ namespace: authelia
 resources:
   - namespace.yaml
   - release.yaml
-  - route.yaml
+  # - route.yaml
