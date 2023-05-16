@@ -1,15 +1,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: istio-ingress
-  namespace: istio-ingress
+  name: istio-base
+  namespace: istio-system
   labels:
     app.kubernetes.io/name: istio
 spec:
-  releaseName: istio-ingress
+  releaseName: istio-base
   chart:
     spec:
-      chart: gateway
+      chart: base
       sourceRef:
         kind: HelmRepository
         name: istio

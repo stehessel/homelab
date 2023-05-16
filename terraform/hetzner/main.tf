@@ -39,7 +39,7 @@ module "kube-hetzner" {
         "node.kubernetes.io/server-usage=storage"
       ],
       taints = [],
-      count  = 1
+      count  = 2
     }
   ]
 
