@@ -8,7 +8,9 @@ spec:
   gateways:
     - ingress/gateway
   http:
-    - route:
+    - match:
+        - port: 80
+      route:
         - destination:
             host: podinfo.podinfo.svc.cluster.local
             port:

@@ -6,9 +6,20 @@ spec:
   selector:
     istio: ingressgateway
   servers:
-    - port:
-        number: 80
-        name: http
-        protocol: HTTP
-      hosts:
+    - hosts:
         - "podinfo.stehessel.org"
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+      tls:
+        httpsRedirect: true
+    - hosts:
+        - "podinfo.stehessel.org"
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        credentialName: stehessel-org-tls
+        mode: SIMPLE
