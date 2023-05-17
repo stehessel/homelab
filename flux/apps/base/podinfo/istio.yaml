@@ -4,9 +4,9 @@ metadata:
   name: podinfo
 spec:
   hosts:
-    - "podinfo.stehessel.com"
+    - "podinfo.stehessel.org"
   gateways:
-    - gateway
+    - ingress/gateway
   http:
     - route:
         - destination:
