@@ -31,3 +31,7 @@ spec:
     provider: cloudflare
     sources:
       - gateway-httproute
+      - ingress
+      - istio-gateway
+      - istio-virtualservice
+      - service
