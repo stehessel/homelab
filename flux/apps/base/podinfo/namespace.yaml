@@ -4,3 +4,4 @@ metadata:
   name: podinfo
   labels:
     gateway-access: "true"
+    istio-injection: enabled
