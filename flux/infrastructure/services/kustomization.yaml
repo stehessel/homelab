@@ -5,8 +5,8 @@ resources:
   - cert-manager
   - external-dns
   # - gateway
-  - istio-control-plane
   - istio-ingress
+  - istio-istiod
   - monitoring
   - oauth2-proxy
   - redis

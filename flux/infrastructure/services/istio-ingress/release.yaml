@@ -4,7 +4,7 @@ metadata:
   name: istio-ingress
   namespace: istio-ingress
   labels:
-    app.kubernetes.io/name: istio
+    app.kubernetes.io/part-of: istio
 spec:
   releaseName: istio-ingress
   chart:
@@ -13,10 +13,12 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: istio
-        namespace: flux-system
+        namespace: istio-system
+  dependsOn:
+    - name: istio-base
+      namespace: istio-system
+    - name: istio-istiod
+      namespace: istio-system
   interval: 5m
-  install:
-    remediation:
-      retries: 3
   # Default values
   # https://istio.io/latest/docs/setup/install/helm

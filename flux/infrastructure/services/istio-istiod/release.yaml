@@ -4,7 +4,7 @@ metadata:
   name: istio-istiod
   namespace: istio-system
   labels:
-    app.kubernetes.io/name: istio
+    app.kubernetes.io/part-of: istio
 spec:
   releaseName: istio-istiod
   chart:
@@ -13,10 +13,12 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: istio
-        namespace: flux-system
+        namespace: istio-system
+  dependsOn:
+    - name: istio-base
   interval: 5m
-  install:
-    remediation:
-      retries: 3
   # Default values
   # https://istio.io/latest/docs/setup/install/helm
+  values:
+    global:
+      istioNamespace: istio-system
