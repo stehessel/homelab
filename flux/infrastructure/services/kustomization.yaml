@@ -4,7 +4,7 @@ resources:
   # - authelia
   - cert-manager
   - external-dns
-  - gateway
+  # - gateway
   - istio-control-plane
   - istio-ingress
   - monitoring

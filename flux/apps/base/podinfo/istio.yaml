@@ -6,7 +6,7 @@ spec:
   hosts:
     - "podinfo.stehessel.org"
   gateways:
-    - ingress/gateway
+    - istio-ingress/gateway
   http:
     - match:
         - port: 80
