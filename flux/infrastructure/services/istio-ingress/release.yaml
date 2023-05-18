@@ -20,4 +20,3 @@ spec:
       retries: 3
   # Default values
   # https://istio.io/latest/docs/setup/install/helm
-  values:
