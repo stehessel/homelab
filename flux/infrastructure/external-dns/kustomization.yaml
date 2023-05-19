@@ -1,8 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: monitoring-system
+namespace: external-dns
 resources:
   - namespace.yaml
+  - rbac.yaml
   - release.yaml
-  # - route.yaml
+  - repository.yaml
   - secret.yaml

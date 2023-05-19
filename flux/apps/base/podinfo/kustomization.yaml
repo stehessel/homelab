@@ -5,4 +5,5 @@ resources:
   - istio.yaml
   - namespace.yaml
   - release.yaml
+  - repository.yaml
   # - route.yaml
