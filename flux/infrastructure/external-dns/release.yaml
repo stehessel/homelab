@@ -34,3 +34,4 @@ spec:
       - istio-gateway
       - istio-virtualservice
       - service
+    logLevel: debug
