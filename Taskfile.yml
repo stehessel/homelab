@@ -57,6 +57,11 @@ tasks:
       - istioctl install --set profile=minimal -y
     desc: Install Istio with minimal capabilities
 
+  istio:manifest:
+    cmds:
+      - istioctl manifest generate -f ./config/istio/operator.yaml -o ./flux/istio
+    desc: Generate Istio manifests based on operator resource
+
   up:
     cmds:
       - task: hetzner:snapshot

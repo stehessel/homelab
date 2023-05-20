@@ -3,14 +3,12 @@ kind: VirtualService
 metadata:
   name: podinfo
 spec:
+  gateways:
+    - istio-system/gateway
   hosts:
     - "podinfo.stehessel.org"
-  gateways:
-    - istio-ingress/gateway
   http:
-    - match:
-        - port: 80
-      route:
+    - route:
         - destination:
             host: podinfo.podinfo.svc.cluster.local
             port:

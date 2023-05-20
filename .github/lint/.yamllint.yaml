@@ -1,6 +1,7 @@
 ignore: |
   *.sops.*
   flux-system/
+  flux/istio/Base/
   terraform/hetzner/extra-manifests/gateway.yaml
 extends: default
 rules:
