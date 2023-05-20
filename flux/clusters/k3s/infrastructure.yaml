@@ -10,6 +10,7 @@ spec:
       name: sops-keys
   dependsOn:
     - name: crds
+    - name: istio
   interval: 2m0s
   path: ./flux/infrastructure
   prune: true
