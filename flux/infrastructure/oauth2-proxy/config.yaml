@@ -14,5 +14,6 @@ data:
     provider = "github"
     redirect_url = "https://auth.stehessel.org/oauth/callback"
     reverse_proxy = true
+    ssl_insecure_skip_verify = true
     upstreams = [ "static://200" ]
     whitelist_domains = ".stehessel.org"
