@@ -227,7 +227,7 @@ data:
         includeRequestHeadersInCheck:
         - authorization
         - cookie
-        port: "4180"
+        port: "80"
         service: oauth2-proxy.oauth2-proxy.svc.cluster.local
       name: oauth2-proxy
     rootNamespace: istio-system
