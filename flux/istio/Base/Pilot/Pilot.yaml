@@ -220,10 +220,28 @@ data:
         - set-cookie
         headersToUpstreamOnAllow:
         - authorization
+        - cookie
         - path
-        - x-auth-request-user
-        - x-auth-request-email
         - x-auth-request-access-token
+        - x-auth-request-email
+        - x-auth-request-user
+        includeAdditionalHeadersInCheck:
+          X-Auth-Request-Redirect: https://%REQ(Host)%/%REQ(:PATH)%
+        includeHeadersInCheck:
+        - accept
+        - authorization
+        - cookie
+        - from
+        - proxy-authorization
+        - user-agent
+        - x-auth-request-redirect
+        - x-forwarded-access-token
+        - x-forwarded-email
+        - x-forwarded-for
+        - x-forwarded-host
+        - x-forwarded-proto
+        - x-forwarded-uri
+        - x-forwarded-user
         includeRequestHeadersInCheck:
         - authorization
         - cookie

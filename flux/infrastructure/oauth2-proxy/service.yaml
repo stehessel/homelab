@@ -12,6 +12,6 @@ spec:
   http:
     - route:
         - destination:
-            host: oauth2-proxy
+            host: oauth2-proxy.oauth2-proxy.svc.cluster.local
             port:
               number: 80

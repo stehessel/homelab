@@ -8,12 +8,14 @@ metadata:
 data:
   oauth2_proxy.cfg: |
     cookie_domains = ".stehessel.org"
+    cookie_secure = false
     email_domains = "*"
     http_address = "0.0.0.0:4180"
     https_address = ":443"
     provider = "github"
-    redirect_url = "https://auth.stehessel.org/oauth/callback"
+    redirect_url = "https://auth.stehessel.org/oauth2/callback"
     reverse_proxy = true
+    scope = "user:email"
     ssl_insecure_skip_verify = true
     upstreams = [ "static://200" ]
     whitelist_domains = ".stehessel.org"
