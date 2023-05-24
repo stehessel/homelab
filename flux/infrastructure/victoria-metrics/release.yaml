@@ -2,7 +2,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: victoria-metrics
-  namespace: monitoring-system
 spec:
   releaseName: vm-k8s
   chart:

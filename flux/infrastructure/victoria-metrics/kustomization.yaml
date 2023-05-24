@@ -7,3 +7,4 @@ resources:
   - repository.yaml
   # - route.yaml
   - secret.yaml
+  - service.yaml
