@@ -11,12 +11,24 @@ spec:
         kind: HelmRepository
         name: victoria-metrics
   interval: 5m
-  install:
-    remediation:
-      retries: 3
   # Default values
   # https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-k8s-stack/README.md
   values:
     grafana:
-      admin:
-        existingSecret: vm-k8s-grafana
+      # admin:
+      #   existingSecret: vm-k8s-grafana
+      grafana.ini:
+        auth:
+          basic:
+            enabled: false
+          disable_login_form: true
+          proxy:
+            enabled: true
+            header_name: X-Auth-Request-User
+
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: "0.5"
+          memory: 512Mi

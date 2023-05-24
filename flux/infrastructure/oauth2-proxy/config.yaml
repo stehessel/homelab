@@ -16,6 +16,7 @@ data:
     redirect_url = "https://auth.stehessel.org/oauth2/callback"
     reverse_proxy = true
     scope = "user:email"
+    set_xauthrequest = true
     ssl_insecure_skip_verify = true
     upstreams = [ "static://200" ]
     whitelist_domains = ".stehessel.org"
