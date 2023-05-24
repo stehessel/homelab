@@ -10,7 +10,9 @@ spec:
     - to:
         - operation:
             hosts:
-              - podinfo.stehessel.org
+              - "*.stehessel.org"
+            notHosts:
+              - auth.stehessel.org
   selector:
     matchLabels:
       istio: ingressgateway
