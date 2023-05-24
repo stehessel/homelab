@@ -40,3 +40,11 @@ spec:
             host: syncthing.syncthing.svc.cluster.local
             port:
               number: 8384
+  tcp:
+    - match:
+        - port: 22000
+      route:
+        - destination:
+            host: syncthing.syncthing.svc.cluster.local
+            port:
+              number: 22000
