@@ -25,6 +25,10 @@ spec:
           proxy:
             enabled: true
             header_name: X-Auth-Request-User
+            header_property: username
+            auto_sign_up: true
+            sync_ttl: 60
+            headers: Email:X-Auth-Request-Email
 
       resources:
         limits:
