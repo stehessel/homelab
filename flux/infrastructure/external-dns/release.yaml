@@ -15,9 +15,6 @@ spec:
         kind: HelmRepository
         name: bitnami
   interval: 5m
-  install:
-    remediation:
-      retries: 3
   # Default values
   # https://artifacthub.io/packages/helm/bitnami/external-dns
   values:

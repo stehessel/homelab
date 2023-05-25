@@ -15,9 +15,6 @@ spec:
         kind: HelmRepository
         name: oauth2-proxy
   interval: 5m
-  install:
-    remediation:
-      retries: 3
   # Default values
   # https://github.com/oauth2-proxy/manifests/tree/main/helm/oauth2-proxy
   values:

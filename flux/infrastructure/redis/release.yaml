@@ -12,9 +12,6 @@ spec:
         name: bitnami
       version: "17.x"
   interval: 1h0m0s
-  install:
-    remediation:
-      retries: 3
   valuesFrom:
     - kind: ConfigMap
       name: redis-values

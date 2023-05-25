@@ -15,9 +15,6 @@ spec:
         kind: HelmRepository
         name: podinfo
   interval: 5m
-  install:
-    remediation:
-      retries: 3
   # Default values
   # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
   values:
