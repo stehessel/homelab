@@ -15,13 +15,12 @@ spec:
   # https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-k8s-stack/README.md
   values:
     grafana:
-      # admin:
-      #   existingSecret: vm-k8s-grafana
+      admin:
+        existingSecret: vm-k8s-grafana
       grafana.ini:
         auth:
           basic:
             enabled: false
-          disable_login_form: true
           proxy:
             enabled: true
             header_name: X-Auth-Request-User
@@ -29,7 +28,14 @@ spec:
             auto_sign_up: true
             sync_ttl: 60
             headers: Email:X-Auth-Request-Email
-
+        server:
+          domain: stehessel.org
+          root_url: https://grafana.stehessel.org
+          serve_from_sub_path: true
+        users:
+          allow_sign_up: false
+          auto_assign_org: true
+          auto_assign_org_role: Viewer
       resources:
         limits:
           memory: 512Mi
