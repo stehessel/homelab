@@ -212,7 +212,7 @@ data:
       tracing:
         zipkin:
           address: zipkin.istio-system:9411
-    enablePrometheusMerge: true
+    enablePrometheusMerge: false
     extensionProviders:
     - envoyExtAuthzHttp:
         headersToDownstreamOnDeny:
@@ -281,8 +281,6 @@ spec:
         operator.istio.io/component: "Pilot"
         istio: pilot
       annotations:
-        prometheus.io/port: "15014"
-        prometheus.io/scrape: "true"
         sidecar.istio.io/inject: "false"
     spec:
       serviceAccountName: istiod

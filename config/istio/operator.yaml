@@ -3,6 +3,7 @@ kind: IstioOperator
 spec:
   meshConfig:
     accessLogFile: /dev/stdout
+    enablePrometheusMerge: false
     extensionProviders:
       - name: oauth2-proxy
         envoyExtAuthzHttp:
