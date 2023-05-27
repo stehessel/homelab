@@ -33,13 +33,13 @@ module "kube-hetzner" {
   agent_nodepools = [
     {
       name        = "agent-fsn1",
-      server_type = "cax21",
+      server_type = "cax31",
       location    = "fsn1",
       labels = [
         "node.kubernetes.io/server-usage=storage"
       ],
       taints = [],
-      count  = 2
+      count  = 1
     }
   ]
 
