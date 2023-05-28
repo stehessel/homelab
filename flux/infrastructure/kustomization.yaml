@@ -7,5 +7,4 @@ resources:
   - istio-gateway
   - monitoring
   - oauth2-proxy
-  - redis
   - victoria-metrics
