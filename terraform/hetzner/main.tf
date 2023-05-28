@@ -26,7 +26,7 @@ module "kube-hetzner" {
       location    = "fsn1",
       labels      = [],
       taints      = [],
-      count       = 1
+      count       = 1,
     }
   ]
 
@@ -39,7 +39,7 @@ module "kube-hetzner" {
         "node.kubernetes.io/server-usage=storage"
       ],
       taints = [],
-      count  = 1
+      count  = 1,
     }
   ]
 
@@ -55,9 +55,9 @@ module "kube-hetzner" {
   cni_plugin         = "cilium"
 
   # Storage
+  disable_hetzner_csi    = true
   enable_longhorn        = true
   longhorn_replica_count = 1
-  disable_hetzner_csi    = true
 
   # Metrics
   enable_metrics_server = false
