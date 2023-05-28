@@ -13,11 +13,6 @@ tasks:
         ignore_error: true
     desc: Build MicroOS snapshots
 
-  crds:install:
-    cmds:
-      - kubectl apply -f https://github.com/VictoriaMetrics/operator/releases/download/v0.33.0/crd.yaml
-    desc: Install CRDs
-
   flux:bootstrap:
     cmds:
       - flux bootstrap github
@@ -67,7 +62,6 @@ tasks:
       - task: hetzner:snapshot
       - task: terraform:init
       - task: terraform:apply
-      - task: crds:install
       - task: flux:bootstrap
       - task: flux:sops
       # - task: cilium:install
