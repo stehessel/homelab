@@ -30,8 +30,8 @@ spec:
               memory: "1024Mi"
           volumeMounts:
             - mountPath: /var/syncthing
-              name: syncthing-volume
+              name: data
       volumes:
-        - name: syncthing-volume
+        - name: data
           persistentVolumeClaim:
-            claimName: syncthing-pvc
+            claimName: syncthing

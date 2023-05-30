@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/name: syncthing
 spec:
-  storageClassName: hcloud-volumes
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
