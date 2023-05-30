@@ -1,0 +1,36 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: velero
+  labels:
+    app.kubernetes.io/name: velero
+spec:
+  releaseName: velero
+  chart:
+    spec:
+      chart: velero
+      sourceRef:
+        kind: HelmRepository
+        name: velero
+  interval: 5m
+  # Default values
+  # https://github.com/vmware-tanzu/helm-charts/blob/main/charts/velero/values.yaml
+  values:
+    configuration:
+      provider: csi
+      backupStorageLocation:
+        name: csi
+        bucket: "my_backup"
+        prefix: "backups/k8s"
+        default: true
+      volumeSnapshotLocation:
+        name: csi
+        provider: csi
+    initContainers:
+      - name: velero-plugin-for-csi
+        image: velero/velero-plugin-for-csi
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: /target
+            name: plugins
+    upgradeCRDs: true
