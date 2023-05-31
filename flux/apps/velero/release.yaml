@@ -33,4 +33,5 @@ spec:
         volumeMounts:
           - mountPath: /target
             name: plugins
+    snapshotsEnabled: false
     upgradeCRDs: false
