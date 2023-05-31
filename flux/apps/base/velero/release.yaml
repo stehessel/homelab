@@ -17,20 +17,20 @@ spec:
   # https://github.com/vmware-tanzu/helm-charts/blob/main/charts/velero/values.yaml
   values:
     configuration:
-      provider: csi
       backupStorageLocation:
-        name: csi
-        bucket: "my_backup"
-        prefix: "backups/k8s"
-        default: true
-      volumeSnapshotLocation:
-        name: csi
-        provider: csi
+        - bucket: homelab-pvc
+          config:
+            s3ForcePathStyle: true
+          credential:
+            name: backblaze
+            key: applicationKey
+          default: true
+          provider: velero.io/aws
     initContainers:
-      - name: velero-plugin-for-csi
-        image: velero/velero-plugin-for-csi
+      - name: velero-plugin-for-aws
+        image: velero/velero-plugin-for-aws
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target
             name: plugins
-    upgradeCRDs: true
+    upgradeCRDs: false

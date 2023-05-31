@@ -1,0 +1,8 @@
+keys:
+  - &master age14hq2vn8nalmp9plfn4x6x9haxm3dv0jzv2mdx2f8p4ud2xwcdq0sfst6p8
+creation_rules:
+  - path_regex: .*\.yaml$
+    encrypted_regex: ^(data|stringData)$
+    key_groups:
+      - age:
+          - *master
