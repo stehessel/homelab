@@ -1,6 +1,14 @@
 /*
  * Creates a MicroOS snapshot for Kube-Hetzner
  */
+packer {
+  required_plugins {
+    hcloud = {
+      version = ">= 1.0.5"
+      source  = "github.com/hashicorp/hcloud"
+    }
+  }
+}
 
 variable "hcloud_token" {
   type      = string
@@ -8,18 +16,16 @@ variable "hcloud_token" {
   sensitive = true
 }
 
-# We download the OpenSUSE MicroOS x86 image from an automatically selected mirror. In case it somehow does not work for you (you get a 403), you can try other mirrors.
-# You can find a working mirror at https://download.opensuse.org/tumbleweed/appliances/openSUSE-MicroOS.x86_64-OpenStack-Cloud.qcow2.mirrorlist
+# We download the OpenSUSE MicroOS x86 image from an automatically selected mirror.
 variable "opensuse_microos_x86_mirror_link" {
   type    = string
-  default = "https://download.opensuse.org/repositories/devel:/kubic:/images/openSUSE_Tumbleweed/openSUSE-MicroOS.x86_64-OpenStack-Cloud.qcow2"
+  default = "https://download.opensuse.org/tumbleweed/appliances/openSUSE-MicroOS.x86_64-ContainerHost-OpenStack-Cloud.qcow2"
 }
 
-# We download the OpenSUSE MicroOS ARM image from an automatically selected mirror. In case it somehow does not work for you (you get a 403), you can try other mirrors.
-# You can find a working mirror at https://download.opensuse.org/ports/aarch64/tumbleweed/appliances/openSUSE-MicroOS.aarch64-OpenStack-Cloud.qcow2.mirrorlist
+# We download the OpenSUSE MicroOS ARM image from an automatically selected mirror.
 variable "opensuse_microos_arm_mirror_link" {
   type    = string
-  default = "https://download.opensuse.org/ports/aarch64/tumbleweed/appliances/openSUSE-MicroOS.aarch64-OpenStack-Cloud.qcow2"
+  default = "https://download.opensuse.org/ports/aarch64/tumbleweed/appliances/openSUSE-MicroOS.aarch64-ContainerHost-OpenStack-Cloud.qcow2"
 }
 
 # If you need to add other packages to the OS, do it here in the default value, like ["vim", "curl", "wget"]
@@ -30,7 +36,7 @@ variable "packages_to_install" {
 }
 
 locals {
-  needed_packages = join(" ", concat(["restorecond policycoreutils policycoreutils-python-utils setools-console bind-utils wireguard-tools open-iscsi nfs-client xfsprogs cryptsetup lvm2 git cifs-utils"], var.packages_to_install))
+  needed_packages = join(" ", concat(["restorecond policycoreutils policycoreutils-python-utils setools-console bind-utils wireguard-tools open-iscsi nfs-client xfsprogs cryptsetup lvm2 git cifs-utils bash-completion mtr tcpdump"], var.packages_to_install))
 
   # Add local variables for inline shell commands
   download_image = "wget --timeout=5 --waitretry=5 --tries=5 --retry-connrefused --inet4-only "
@@ -46,14 +52,16 @@ locals {
   install_packages = <<-EOT
     set -ex
     echo "First reboot successful, installing needed packages..."
-    transactional-update shell <<< "setenforce 0"
-    transactional-update --continue shell <<< "zypper --gpg-auto-import-keys install -y ${local.needed_packages}"
-    transactional-update --continue shell <<< "rpm --import https://rpm-testing.rancher.io/public.key"
-    transactional-update --continue shell <<< "zypper --no-gpg-checks --non-interactive install https://github.com/k3s-io/k3s-selinux/releases/download/v1.3.testing.4/k3s-selinux-1.3-4.sle.noarch.rpm"
-    transactional-update --continue shell <<< "zypper addlock k3s-selinux"
-    transactional-update --continue shell <<< "restorecon -Rv /etc/selinux/targeted/policy && restorecon -Rv /var/lib && setenforce 1"
-    echo "Make sure to use NetworkManager"
-    touch /etc/NetworkManager/NetworkManager.conf
+    transactional-update --continue pkg install -y ${local.needed_packages}
+    transactional-update --continue shell <<- EOF
+    setenforce 0
+    rpm --import https://rpm.rancher.io/public.key
+    zypper install -y https://github.com/k3s-io/k3s-selinux/releases/download/v1.4.stable.1/k3s-selinux-1.4-1.sle.noarch.rpm
+    zypper addlock k3s-selinux
+    restorecon -Rv /etc/selinux/targeted/policy
+    restorecon -Rv /var/lib
+    setenforce 1
+    EOF
     sleep 1 && udevadm settle && reboot
   EOT
 
@@ -61,6 +69,8 @@ locals {
     set -ex
     echo "Second reboot successful, cleaning-up..."
     rm -rf /etc/ssh/ssh_host_*
+    echo "Make sure to use NetworkManager"
+    touch /etc/NetworkManager/NetworkManager.conf
     sleep 1 && udevadm settle
   EOT
 }

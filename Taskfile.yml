@@ -9,6 +9,7 @@ tasks:
   hetzner:snapshot:
     cmds:
       - curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/packer-template/hcloud-microos-snapshots.pkr.hcl -o "hcloud-microos-snapshots.pkr.hcl"
+      - cmd: packer init hcloud-microos-snapshots.pkr.hcl
       - cmd: packer build hcloud-microos-snapshots.pkr.hcl
         ignore_error: true
     desc: Build MicroOS snapshots
