@@ -63,13 +63,7 @@ module "kube-hetzner" {
   enable_metrics_server = false
 
   # Certificates
-  enable_cert_manager = true
-  cert_manager_values = <<EOT
-image:
-  repository: quay.io/jetstack/cert-manager-controller-arm
-installCRDs: true
-featureGates: ExperimentalGatewayAPISupport=true
-  EOT
+  enable_cert_manager = false
 
   # extra_firewall_rules = [
   #   # Syncthing
