@@ -63,6 +63,7 @@ spec:
         operator.istio.io/component: "IngressGateways"
         sidecar.istio.io/inject: "false"
       annotations:
+        istio.io/rev: default
         sidecar.istio.io/inject: "false"
     spec:
       securityContext:
@@ -73,7 +74,7 @@ spec:
       serviceAccountName: istio-ingressgateway-service-account
       containers:
         - name: istio-proxy
-          image: "docker.io/istio/proxyv2:1.17.2"
+          image: "docker.io/istio/proxyv2:1.18.2"
           ports:
             - containerPort: 15021
               protocol: TCP
@@ -148,6 +149,10 @@ spec:
               fieldRef:
                 apiVersion: v1
                 fieldPath: status.hostIP
+          - name: ISTIO_CPU_LIMIT
+            valueFrom:
+              resourceFieldRef:
+                resource: limits.cpu
           - name: SERVICE_ACCOUNT
             valueFrom:
               fieldRef:
