@@ -4,6 +4,10 @@ metadata:
   name: cert-manager
   namespace: flux-system
 spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-keys
   dependsOn:
     - name: crds
   interval: 2m0s

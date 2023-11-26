@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: cert-manager
 spec:
   acme:
-    email: accounts@stehessel.de
+    email: cloud@stephan.sh
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-staging
@@ -25,7 +25,7 @@ metadata:
     app.kubernetes.io/name: cert-manager
 spec:
   acme:
-    email: accounts@stehessel.de
+    email: cloud@stephan.sh
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt

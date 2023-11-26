@@ -18,7 +18,7 @@ spec:
   # https://artifacthub.io/packages/helm/bitnami/external-dns
   values:
     cloudflare:
-      email: accounts@stehessel.de
+      email: cloud@stephan.sh
       proxied: false
       secretName: cloudflare-dns
     extraArgs:
