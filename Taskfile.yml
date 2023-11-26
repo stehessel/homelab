@@ -35,24 +35,6 @@ tasks:
       - flux install --export > ./flux/clusters/k3s/flux-system/gotk-components.yaml
     desc: Upgrade fluxcd
 
-  cilium:install:
-    cmds:
-      - helm uninstall cilium -n kube-system
-      - kubectl wait --for=delete namespace cilium-secrets --timeout=60s
-      - helm upgrade cilium cilium/cilium --install --version 1.13.2 --namespace kube-system --set kubeProxyReplacement=strict --set devices='eth1' --set hubble.relay.enabled=true  --set hubble.ui.enabled=true --set gatewayAPI.enabled=true --set ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16" --set ipam.operator.clusterPoolIpv6PodCIDRList="fd42::/48" --set operator.replicas=1 --set ipv6.enabled=true --set prometheus.enabled=true --set operator.prometheus.enabled=true --set hubble.metrics.enableOpenMetrics=true --set hubble.metrics.enabled="{dns,drop,tcp,flow,port-distribution,icmp,httpV2:exemplars=true;labelsContext=source_ip\,source_namespace\,source_workload\,destination_ip\,destination_namespace\,destination_workload\,traffic_direction}"
-    desc: Install Cilium
-
-  contour:install:
-    cmds:
-      - kubectl apply -f https://projectcontour.io/quickstart/contour-gateway-provisioner.yaml
-      - kubectl apply -f ./flux/infrastructure/services/gateway/contour.yaml
-    desc: Install Contour
-
-  istio:install:
-    cmds:
-      - istioctl install --set profile=minimal -y
-    desc: Install Istio with minimal capabilities
-
   istio:manifest:
     cmds:
       - istioctl manifest generate -f ./config/istio/operator.yaml -o ./flux/istio
@@ -65,9 +47,6 @@ tasks:
       - task: terraform:apply
       - task: flux:bootstrap
       - task: flux:sops
-      # - task: cilium:install
-      # - task: contour:install
-      # - task: istio:install
     desc: Turn up the cluster and bootstrap fluxcd
 
   destroy:
