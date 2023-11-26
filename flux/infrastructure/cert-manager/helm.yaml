@@ -26,5 +26,5 @@ spec:
   values:
     image:
       repository: quay.io/jetstack/cert-manager-controller-arm
-    installCRDs: true
+    # installCRDs: true
     featureGates: ExperimentalGatewayAPISupport=true
