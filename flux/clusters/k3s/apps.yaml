@@ -4,6 +4,10 @@ metadata:
   name: apps
   namespace: flux-system
 spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-keys
   dependsOn:
     - name: crds
     - name: infrastructure

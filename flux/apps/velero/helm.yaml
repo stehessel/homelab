@@ -1,3 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: velero
+spec:
+  interval: 30m
+  url: https://vmware-tanzu.github.io/helm-charts
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -16,15 +24,20 @@ spec:
   # Default values
   # https://github.com/vmware-tanzu/helm-charts/blob/main/charts/velero/values.yaml
   values:
+    credentials:
+      name: velero
     configuration:
       backupStorageLocation:
-        - bucket: homelab-pvc
+        - bucket: stehessel-homelab-velero
           config:
+            region: us-east-1 # Dummy region required by the AWS plugin.
             s3ForcePathStyle: true
+            s3Url: https://s3.us-west-000.backblazeb2.com
           credential:
             name: backblaze
-            key: applicationKey
+            key: credentials
           default: true
+          name: backblaze
           provider: velero.io/aws
     initContainers:
       - name: velero-plugin-for-aws
@@ -33,5 +46,8 @@ spec:
         volumeMounts:
           - mountPath: /target
             name: plugins
+    deployNodeAgent: true
+    nodeAgent:
+      privileged: true
     snapshotsEnabled: false
     upgradeCRDs: false

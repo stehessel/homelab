@@ -100,6 +100,7 @@
             pkgs.packer
             pkgs.sops
             pkgs.terraform
+            pkgs.trivy
             pkgs.yq-go
           ];
         };

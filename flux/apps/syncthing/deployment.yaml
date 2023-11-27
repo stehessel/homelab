@@ -11,6 +11,8 @@ spec:
       app.kubernetes.io/name: syncthing
   template:
     metadata:
+      annotations:
+        backup.velero.io/backup-volumes: data
       labels:
         app.kubernetes.io/name: syncthing
     spec:
