@@ -40,6 +40,15 @@ tasks:
       - istioctl manifest generate -f ./config/istio/operator.yaml -o ./flux/istio
     desc: Generate Istio manifests based on operator resource
 
+  backup:restore:
+    cmds:
+      - flux suspend kustomization apps
+      - kubectl delete deployments syncthing -n syncthing
+      - kubectl delete pvc syncthing -n syncthing
+      - velero restore create --from-backup syncthing-backup
+      - kubectl wait pods -n syncthing -l app.kubernetes.io/name=syncthing --for condition=Ready --timeout=90s
+      - flux resume kustomization apps
+
   up:
     cmds:
       - task: hetzner:snapshot
