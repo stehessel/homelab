@@ -28,7 +28,7 @@ spec:
             limits:
               memory: "1024Mi"
             requests:
-              cpu: "250m"
+              cpu: "100m"
               memory: "1024Mi"
           volumeMounts:
             - mountPath: /var/syncthing
