@@ -49,6 +49,10 @@ tasks:
       - kubectl wait pods -n syncthing -l app.kubernetes.io/name=syncthing --for condition=Ready --timeout=90s
       - flux resume kustomization apps
 
+  velero:repo-secret:
+    cmds:
+      - sops --decrypt --extract '["velero"]["repo"]' ./terraform/hetzner/secrets/base.yaml | kubectl apply -f -
+
   up:
     cmds:
       - task: hetzner:snapshot
