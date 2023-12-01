@@ -26,24 +26,26 @@ spec:
       admin:
         existingSecret: vm-k8s-grafana
       grafana.ini:
+        # auth.anonymous:
+        #   enabled: true
+        #   org_role: Admin
+        auth.basic:
+          enabled: false
+        auth.proxy:
+          enabled: true
+          header_name: X-Auth-Request-User
+          header_property: username
+          auto_sign_up: true
+          sync_ttl: 60
+          headers: Email:X-Auth-Request-Email
         auth:
-          basic:
-            enabled: false
-          proxy:
-            enabled: true
-            header_name: X-Auth-Request-User
-            header_property: username
-            auto_sign_up: true
-            sync_ttl: 60
-            headers: Email:X-Auth-Request-Email
+          disable_login_form: true
         server:
           domain: stehessel.org
           root_url: https://grafana.stehessel.org
           serve_from_sub_path: true
         users:
-          allow_sign_up: false
-          auto_assign_org: true
-          auto_assign_org_role: Viewer
+          auto_assign_org_role: Editor
       resources:
         limits:
           memory: 2048Mi
