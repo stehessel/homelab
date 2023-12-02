@@ -40,18 +40,27 @@ tasks:
       - istioctl manifest generate -f ./config/istio/operator.yaml -o ./flux/istio
     desc: Generate Istio manifests based on operator resource
 
+  backup:create:
+    cmds:
+      - velero backup create homelab-backup --include-namespaces=mealie,syncthing
+
   backup:restore:
     cmds:
       - flux suspend kustomization apps
+      # - defer: flux resume kustomization apps
+
+      - kubectl delete deployments mealie -n mealie
+      - kubectl delete pvc mealie -n mealie
       - kubectl delete deployments syncthing -n syncthing
       - kubectl delete pvc syncthing -n syncthing
-      - velero restore create --from-backup syncthing-backup
-      - kubectl wait pods -n syncthing -l app.kubernetes.io/name=syncthing --for condition=Ready --timeout=90s
-      - flux resume kustomization apps
+
+      - velero restore create --from-backup=homelab-backup --include-namespaces=mealie,syncthing
 
   velero:repo-secret:
     cmds:
-      - sops --decrypt --extract '["velero"]["repo"]' ./terraform/hetzner/secrets/base.yaml | kubectl apply -f -
+      - kubectl delete secret -n velero velero-repo-credentials --ignore-not-found=true
+      - sops --decrypt --extract '["velero"]["repo"]' ./terraform/hetzner/secrets/base.yaml | kubectl create -f -
+      - kubectl rollout restart deploy velero -n velero
 
   up:
     cmds:
