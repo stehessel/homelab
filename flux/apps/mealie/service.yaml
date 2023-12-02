@@ -33,4 +33,4 @@ spec:
         - destination:
             host: mealie.mealie.svc.cluster.local
             port:
-              number: 80
+              number: 9000
