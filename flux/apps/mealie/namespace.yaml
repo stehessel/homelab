@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mealie
+  labels:
+    gateway-access: "true"
+    istio-injection: enabled
