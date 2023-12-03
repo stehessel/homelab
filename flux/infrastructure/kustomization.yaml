@@ -4,6 +4,7 @@ resources:
   - external-dns
   # - gateway
   - istio-gateway
+  - kyverno
   - monitoring
   - oauth2-proxy
   - victoria-metrics

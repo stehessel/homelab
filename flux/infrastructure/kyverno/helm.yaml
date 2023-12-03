@@ -1,0 +1,26 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: kyverno
+spec:
+  interval: 5m
+  url: https://kyverno.github.io/kyverno
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kyverno
+  labels:
+    app.kubernetes.io/name: kyverno
+spec:
+  releaseName: kyverno
+  chart:
+    spec:
+      chart: kyverno
+      sourceRef:
+        kind: HelmRepository
+        name: kyverno
+  interval: 5m
+  # Default values
+  # https://artifacthub.io/packages/helm/kyverno/kyverno
+  values:

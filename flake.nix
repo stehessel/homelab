@@ -96,7 +96,6 @@
             pkgs.kubeconform
             pkgs.kustomize
             pkgs.linkerd
-            pkgs.nushell
             pkgs.packer
             pkgs.sops
             pkgs.terraform
