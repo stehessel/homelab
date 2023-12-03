@@ -25,6 +25,11 @@ tasks:
         --token-auth
     desc: Bootstrap fluxcd
 
+  timoni:bootstrap:
+    cmds:
+      - timoni bundle apply -f ./timoni/bundles/flux-aio.cue
+    desc: Bootstrap fluxcd with timoni
+
   flux:sops:
     cmds:
       - sops --decrypt --extract '["flux"]["sops"]' ./terraform/hetzner/secrets/base.yaml | kubectl apply -f -
@@ -67,8 +72,8 @@ tasks:
       - task: hetzner:snapshot
       - task: terraform:init
       - task: terraform:apply
-      - task: flux:bootstrap
       - task: flux:sops
+      - task: timoni:bootstrap
     desc: Turn up the cluster and bootstrap fluxcd
 
   down:
