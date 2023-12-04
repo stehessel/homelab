@@ -1,6 +1,13 @@
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 spec:
+  components:
+    ingressGateways:
+      - name: istio-ingressgateway
+        k8s:
+          resources:
+            limits:
+              cpu: null
   meshConfig:
     accessLogFile: /dev/stdout
     enablePrometheusMerge: false
