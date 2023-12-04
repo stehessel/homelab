@@ -26,9 +26,6 @@ spec:
       admin:
         existingSecret: vm-k8s-grafana
       grafana.ini:
-        # auth.anonymous:
-        #   enabled: true
-        #   org_role: Admin
         auth.basic:
           enabled: false
         auth.proxy:
@@ -52,3 +49,6 @@ spec:
         requests:
           cpu: 100m
           memory: 512Mi
+    kubelet:
+      spec:
+        interval: "60s"
