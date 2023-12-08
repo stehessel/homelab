@@ -44,8 +44,9 @@ module "kube-hetzner" {
   ]
 
   allow_scheduling_on_control_plane = false
+  automatically_upgrade_k3s         = false
   automatically_upgrade_os          = false
-  initial_k3s_channel               = "stable"
+  initial_k3s_channel               = "latest"
 
   # Networking
   load_balancer_type     = "lb11"
