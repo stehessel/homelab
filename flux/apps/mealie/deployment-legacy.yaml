@@ -11,6 +11,8 @@ spec:
       app.kubernetes.io/name: mealie
   template:
     metadata:
+      annotations:
+        backup.velero.io/backup-volumes: data
       labels:
         app.kubernetes.io/name: mealie
     spec:
@@ -22,12 +24,12 @@ spec:
               value: "true"
             - name: BASE_URL
               value: https://mealie.stehessel.org
-            - name: TZ
-              value: "Europe/Berlin"
             - name: PUID
               value: "1000"
             - name: PGID
               value: "1000"
+            - name: TZ
+              value: "Europe/Berlin"
           ports:
             - containerPort: 9000
               name: app
