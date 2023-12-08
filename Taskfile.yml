@@ -70,7 +70,6 @@ tasks:
       - task: terraform:init
       - task: terraform:apply
       - task: timoni:bootstrap
-      - task: flux:sops
     desc: Turn up the cluster and bootstrap fluxcd
 
   down:
