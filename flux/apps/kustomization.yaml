@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - mealie
   - podinfo
+  - policies
   - syncthing
   - velero
   - whoami
