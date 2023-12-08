@@ -28,13 +28,9 @@ tasks:
   timoni:bootstrap:
     cmds:
       - timoni bundle apply -f ./timoni/bundles/flux-aio.cue
+      - sops --decrypt --extract '["flux"]["sops"]' ./terraform/hetzner/secrets/base.yaml | kubectl apply -f -
       - timoni bundle apply -f ./timoni/bundles/k3s.cue
     desc: Bootstrap fluxcd with timoni
-
-  flux:sops:
-    cmds:
-      - sops --decrypt --extract '["flux"]["sops"]' ./terraform/hetzner/secrets/base.yaml | kubectl apply -f -
-    desc: Create fluxcd SOPS secret
 
   flux:upgrade:
     cmds:
