@@ -34,11 +34,8 @@ spec:
             - containerPort: 9000
               name: app
           resources:
-            limits:
-              memory: 512Mi
             requests:
               cpu: 100m
-              memory: 512Mi
           volumeMounts:
             - mountPath: /app/data
               name: data
