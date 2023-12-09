@@ -13,6 +13,7 @@ spec:
               - "*.stehessel.org"
             notHosts:
               - "auth.stehessel.org"
+              - "mealie.stehessel.org"
   selector:
     matchLabels:
       istio: ingressgateway
