@@ -29,14 +29,11 @@ spec:
     metrics:
       enabled: true
     monitoring:
+      enabled: true
       grafana:
-        namespace: monitoring-system
-        dashboards:
-          enabled: true
-          label: grafana_dashboard
-        folder:
-          annotation: grafana_folder
-          name: Policy Reporter
+        namespace: policy-reporter
+      plugins:
+        kyverno: true
     ui:
       displayMode: dark
       enabled: true
