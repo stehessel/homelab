@@ -30,6 +30,15 @@ spec:
             requests:
               cpu: 100m
               memory: 1024Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            # runAsNonRoot: true
+            capabilities:
+              add: ["CHOWN", "SETGID", "SETUID"]
+              drop: ["ALL"]
+            seccompProfile:
+              type: "RuntimeDefault"
           volumeMounts:
             - mountPath: /var/syncthing
               name: data
