@@ -4,6 +4,7 @@ resources:
   - mealie
   - podinfo
   - policies
+  - policy-reporter
   - syncthing
   - velero
   - whoami
