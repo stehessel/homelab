@@ -1,5 +1,10 @@
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
+metadata:
+  labels:
+    app.kubernetes.io/component: istio-operator
+    app.kubernetes.io/name: istio-system
+    app.kubernetes.io/part-of: istio
 spec:
   components:
     ingressGateways:
@@ -9,7 +14,9 @@ spec:
             limits:
               cpu: null
         label:
+          app.kubernetes.io/component: istio-ingressgateway
           app.kubernetes.io/name: istio-ingressgateway
+          app.kubernetes.io/part-of: istio
   meshConfig:
     accessLogFile: /dev/stdout
     defaultConfig:

@@ -24,5 +24,18 @@ spec:
   # Default values
   # https://artifacthub.io/packages/helm/kyverno/kyverno
   values:
+    cleanupJobs:
+      admissionReports:
+        podLabels:
+          app.kubernetes.io/component: admissionReports
+          app.kubernetes.io/name: kyverno
+          app.kubernetes.io/part-of: kyverno-cleanup
+      clusterAdmissionReports:
+        podLabels:
+          app.kubernetes.io/component: clusterAdmissionReports
+          app.kubernetes.io/name: kyverno
+          app.kubernetes.io/part-of: kyverno-cleanup
+    customLabels:
+      app.kubernetes.io/name: kyverno
     grafana:
       enabled: true
