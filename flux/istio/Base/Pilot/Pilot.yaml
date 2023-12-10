@@ -196,6 +196,8 @@ data:
     accessLogFile: /dev/stdout
     defaultConfig:
       discoveryAddress: istiod.istio-system.svc:15012
+      gatewayTopology:
+        numTrustedProxies: 1
       proxyMetadata: {}
       tracing:
         zipkin:
@@ -215,6 +217,7 @@ data:
         - X-Auth-Request-Email
         - X-Auth-Request-Preferred-Username
         - X-Auth-Request-User
+        - X-Forwarded-For
         includeAdditionalHeadersInCheck:
           X-Auth-Request-Redirect: https://%REQ(Host)%/%REQ(:PATH)%
         includeRequestHeadersInCheck:
