@@ -49,6 +49,11 @@ spec:
         requests:
           cpu: 100m
           memory: 512Mi
+      sidecar:
+        dashboards:
+          label: grafana_dashboard
+          labelValue: "1"
+          searchNamespace: ALL
     kubelet:
       spec:
         interval: "60s"

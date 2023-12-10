@@ -24,6 +24,8 @@ spec:
   # Default values
   # https://artifacthub.io/packages/helm/kyverno/kyverno
   values:
+    grafana:
+      enabled: true
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
