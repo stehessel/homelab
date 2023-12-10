@@ -38,7 +38,7 @@ spec:
               cpu: 100m
           securityContext:
             allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
+            readOnlyRootFilesystem: false
             # runAsNonRoot: true
             capabilities:
               drop: ["ALL"]
@@ -51,3 +51,4 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mealie
+          readOnly: false
