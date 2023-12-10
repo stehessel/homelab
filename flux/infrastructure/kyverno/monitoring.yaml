@@ -1,0 +1,15 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: kyverno
+  labels:
+    app.kubernetes.io/name: kyverno
+spec:
+  endpoints:
+    - port: metrics-port
+  namespaceSelector:
+    matchNames:
+      - kyverno
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: kyverno

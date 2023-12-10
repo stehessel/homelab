@@ -3,4 +3,5 @@ kind: Kustomization
 namespace: kyverno
 resources:
   - helm.yaml
+  - monitoring.yaml
   - namespace.yaml
