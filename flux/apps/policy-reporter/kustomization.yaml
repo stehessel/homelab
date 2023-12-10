@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: policy-reporter
 resources:
   - helm.yaml
+  - monitoring.yaml
   - namespace.yaml
   - service.yaml

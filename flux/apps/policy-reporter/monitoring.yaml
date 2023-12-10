@@ -1,0 +1,55 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: policy-reporter-monitoring
+  labels:
+    app.kubernetes.io/component: monitoring
+    app.kubernetes.io/instance: policy-reporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: monitoring
+    app.kubernetes.io/part-of: kyverno
+spec:
+  endpoints:
+    - honorLabels: false
+      port: http
+      relabelConfigs:
+        - action: labeldrop
+          regex: pod|service|container
+        - action: replace
+          replacement: policy-reporter
+          targetLabel: instance
+  namespaceSelector:
+    matchNames:
+      - policy-reporter
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: policy-reporter
+      app.kubernetes.io/name: policy-reporter
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: policy-reporter-monitoring-kyverno-plugin
+  labels:
+    app.kubernetes.io/component: monitoring
+    app.kubernetes.io/instance: policy-reporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: monitoring
+    app.kubernetes.io/part-of: kyverno
+spec:
+  endpoints:
+    - honorLabels: false
+      port: rest
+      relabelConfigs:
+        - action: labeldrop
+          regex: pod|service|container
+        - action: replace
+          replacement: policy-reporter
+          targetLabel: instance
+  namespaceSelector:
+    matchNames:
+      - policy-reporter
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: policy-reporter
+      app.kubernetes.io/name: kyverno-plugin
