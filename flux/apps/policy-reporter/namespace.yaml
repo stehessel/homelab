@@ -4,4 +4,3 @@ metadata:
   name: policy-reporter
   labels:
     gateway-access: "true"
-    istio-injection: enabled

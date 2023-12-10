@@ -4,4 +4,3 @@ metadata:
   name: oauth2-proxy
   labels:
     gateway-access: "true"
-    istio-injection: enabled
