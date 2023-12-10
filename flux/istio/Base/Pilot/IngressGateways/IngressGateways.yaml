@@ -7,6 +7,7 @@ metadata:
   namespace: istio-system
   labels:
     app: istio-ingressgateway
+    app.kubernetes.io/name: istio-ingressgateway
     istio: ingressgateway
     release: istio
     istio.io/rev: default
@@ -34,6 +35,7 @@ kind: Deployment
 metadata:
   labels:
     app: istio-ingressgateway
+    app.kubernetes.io/name: istio-ingressgateway
     install.operator.istio.io/owning-resource: unknown
     istio: ingressgateway
     istio.io/rev: default
@@ -45,6 +47,7 @@ spec:
   selector:
     matchLabels:
       app: istio-ingressgateway
+      app.kubernetes.io/name: istio-ingressgateway
       istio: ingressgateway
   strategy:
     rollingUpdate:
@@ -57,6 +60,7 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: istio-ingressgateway
+        app.kubernetes.io/name: istio-ingressgateway
         chart: gateways
         heritage: Tiller
         install.operator.istio.io/owning-resource: unknown
@@ -258,6 +262,7 @@ metadata:
   namespace: istio-system
   labels:
     app: istio-ingressgateway
+    app.kubernetes.io/name: istio-ingressgateway
     istio: ingressgateway
     release: istio
     istio.io/rev: default
@@ -268,6 +273,7 @@ spec:
   selector:
     matchLabels:
       app: istio-ingressgateway
+      app.kubernetes.io/name: istio-ingressgateway
       istio: ingressgateway
 ---
 
@@ -317,6 +323,7 @@ metadata:
   annotations:
   labels:
     app: istio-ingressgateway
+    app.kubernetes.io/name: istio-ingressgateway
     istio: ingressgateway
     release: istio
     istio.io/rev: default
@@ -326,6 +333,7 @@ spec:
   type: LoadBalancer
   selector:
     app: istio-ingressgateway
+    app.kubernetes.io/name: istio-ingressgateway
     istio: ingressgateway
   ports:
     -
@@ -353,6 +361,7 @@ metadata:
   namespace: istio-system
   labels:
     app: istio-ingressgateway
+    app.kubernetes.io/name: istio-ingressgateway
     istio: ingressgateway
     release: istio
     istio.io/rev: default

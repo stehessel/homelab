@@ -8,6 +8,8 @@ spec:
           resources:
             limits:
               cpu: null
+        label:
+          app.kubernetes.io/name: istio-ingressgateway
   meshConfig:
     accessLogFile: /dev/stdout
     defaultConfig:
