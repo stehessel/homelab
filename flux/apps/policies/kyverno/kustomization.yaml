@@ -5,3 +5,4 @@ resources:
   - helm.yaml
   - require-labels.yaml
   - restrict-nodeport.yaml
+  - verify-images.yaml

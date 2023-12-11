@@ -1,0 +1,47 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: verify-images
+spec:
+  validationFailureAction: enforce
+  background: false
+  webhookTimeoutSeconds: 30
+  failurePolicy: Fail
+  rules:
+    - name: verify-flux-signature
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      verifyImages:
+        - imageReferences:
+            - "ghcr.io/fluxcd/helm-controller:*"
+            - "ghcr.io/fluxcd/image-automation-controller:*"
+            - "ghcr.io/fluxcd/image-reflector-controller:*"
+            - "ghcr.io/fluxcd/kustomize-controller:*"
+            - "ghcr.io/fluxcd/notification-controller:*"
+            - "ghcr.io/fluxcd/source-controller:*"
+          attestors:
+            - entries:
+                - keyless:
+                    issuer: "https://token.actions.githubusercontent.com"
+                    subject: "https://github.com/fluxcd/*"
+                    rekor:
+                      url: https://rekor.sigstore.dev
+    - name: verify-podinfo-signature
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      verifyImages:
+        - imageReferences:
+            - "ghcr.io/stefanprodan/podinfo"
+          attestors:
+            - entries:
+                - keyless:
+                    issuer: "https://token.actions.githubusercontent.com"
+                    subject: "https://github.com/podinfo/*"
+                    rekor:
+                      url: https://rekor.sigstore.dev
