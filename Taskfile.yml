@@ -44,19 +44,23 @@ tasks:
 
   backup:create:
     cmds:
-      - velero backup create --include-namespaces=mealie,syncthing {{.CLI_ARGS}}
+      - velero backup create --from-schedule homelab
+
+  backup:schedule:
+    cmds:
+      - velero schedule create homelab --schedule="0 12 * * *" --include-namespaces=mealie,syncthing
 
   backup:restore:
     cmds:
       - flux suspend kustomization apps
-      # - defer: flux resume kustomization apps
+      - defer: flux resume kustomization apps
 
       - kubectl delete deployments mealie -n mealie
       - kubectl delete pvc mealie -n mealie
       - kubectl delete deployments syncthing -n syncthing
       - kubectl delete pvc syncthing -n syncthing
 
-      - velero restore create --include-namespaces=mealie,syncthing {{.CLI_ARGS}}
+      - velero restore create --from-schedule homelab --include-namespaces=mealie,syncthing --wait
 
   velero:repo-secret:
     cmds:
