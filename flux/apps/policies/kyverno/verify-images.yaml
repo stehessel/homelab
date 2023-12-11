@@ -2,6 +2,10 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: verify-images
+  annotations:
+    policies.kyverno.io/category: Signatures
+    policies.kyverno.io/severity: critical
+    policies.kyverno.io/title: Verify Image Signatures
 spec:
   validationFailureAction: enforce
   background: false
