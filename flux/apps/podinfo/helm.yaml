@@ -22,6 +22,8 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo
+      verify:
+        provider: cosign
   interval: 5m
   # Default values
   # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
