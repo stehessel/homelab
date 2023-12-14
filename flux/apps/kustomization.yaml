@@ -6,5 +6,6 @@ resources:
   - policies
   - policy-reporter
   - syncthing
+  - trivy-operator
   - velero
   - whoami

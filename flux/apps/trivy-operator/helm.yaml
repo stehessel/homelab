@@ -1,0 +1,26 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: aquasecurity
+spec:
+  interval: 5m
+  url: https://aquasecurity.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: trivy-operator
+  labels:
+    app.kubernetes.io/name: trivy-operator
+spec:
+  releaseName: trivy-operator
+  chart:
+    spec:
+      chart: trivy-operator
+      sourceRef:
+        kind: HelmRepository
+        name: aquasecurity
+  interval: 5m
+  # Default values
+  # https://github.com/aquasecurity/trivy-operator/blob/main/deploy/helm/values.yaml
+  values:
