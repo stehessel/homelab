@@ -25,6 +25,21 @@ spec:
     grafana:
       admin:
         existingSecret: vm-k8s-grafana
+      dashboardProviders:
+        dashboardproviders.yaml:
+          apiVersion: 1
+          providers:
+            - name: grafana-dashboards-kubernetes
+              disableDeletion: true
+              editable: true
+              options:
+                path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
+              orgId: 1
+              type: file
+      dashboards:
+        grafana-dashboards-kubernetes:
+          k8s-addons-trivy-operator:
+            url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-addons-trivy-operator.json
       grafana.ini:
         auth.basic:
           enabled: false
