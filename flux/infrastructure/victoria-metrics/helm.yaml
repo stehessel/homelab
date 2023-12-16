@@ -40,6 +40,13 @@ spec:
         grafana-dashboards-kubernetes:
           k8s-addons-trivy-operator:
             url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-addons-trivy-operator.json
+      datasources:
+        datasources.yaml:
+          datasources:
+            - name: Loki
+              type: loki
+              access: proxy
+              url: http://loki-gateway.loki.svc.cluster.local
       grafana.ini:
         auth.basic:
           enabled: false
