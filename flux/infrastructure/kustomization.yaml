@@ -5,6 +5,7 @@ resources:
   # - gateway
   - istio-gateway
   - kyverno
+  - loki
   - monitoring
   - oauth2-proxy
   - victoria-metrics
