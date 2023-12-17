@@ -22,7 +22,7 @@ spec:
         name: grafana
   interval: 5m
   # Default values
-  # https://github.com/grafana/helm-charts/blob/main/charts/loki-stack/values.yaml
+  # https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
   values:
     loki:
       auth_enabled: false
