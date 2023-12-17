@@ -8,4 +8,5 @@ resources:
   - loki
   - monitoring
   - oauth2-proxy
+  - vector
   - victoria-metrics

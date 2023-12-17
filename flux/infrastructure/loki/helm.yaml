@@ -25,6 +25,7 @@ spec:
   # https://github.com/grafana/helm-charts/blob/main/charts/loki-stack/values.yaml
   values:
     loki:
+      auth_enabled: false
       commonConfig:
         replication_factor: 1
       storage:
