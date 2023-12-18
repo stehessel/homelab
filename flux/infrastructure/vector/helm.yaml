@@ -36,6 +36,9 @@ spec:
         address: 127.0.0.1:8686
         playground: false
       sources:
+        prometheus_remote_write:
+          type: prometheus_remote_write
+          address: 0.0.0.0:9091
         kubernetes_logs:
           type: kubernetes_logs
         host_metrics:
@@ -55,7 +58,7 @@ spec:
           inputs: [host_metrics, internal_metrics]
           address: 0.0.0.0:9090
         loki:
-          type: "loki"
+          type: loki
           inputs: ["kubernetes_logs"]
           endpoint: http://loki-gateway.loki.svc.cluster.local
           encoding:
@@ -65,8 +68,17 @@ spec:
               {{ print "{{ kubernetes.pod_labels }}" }}
             "*": |-
               {{ print "{{ metadata }}" }}
-        stdout:
-          type: console
-          inputs: [kubernetes_logs]
-          encoding:
-            codec: json
+        new_relic_logs:
+          type: new_relic
+          inputs: ["kubernetes_logs"]
+          account_id: "4287142"
+          api: logs
+          license_key: eu01xx96a9fbb51eead1b7bee9de37f1FFFFNRAL
+          region: eu
+        new_relic_metrics:
+          type: new_relic
+          inputs: ["prometheus_remote_write"]
+          account_id: "4287142"
+          api: metrics
+          license_key: eu01xx96a9fbb51eead1b7bee9de37f1FFFFNRAL
+          region: eu

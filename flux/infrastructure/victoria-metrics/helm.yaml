@@ -79,3 +79,6 @@ spec:
     kubelet:
       spec:
         interval: "60s"
+    vmagent:
+      additionalRemoteWrites:
+        - url: http://vector.vector.svc.cluster.local:9091
