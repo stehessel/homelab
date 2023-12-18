@@ -59,13 +59,12 @@ spec:
           inputs: ["kubernetes_logs"]
           endpoint: http://loki-gateway.loki.svc.cluster.local
           encoding:
-            codec: json
+            codec: native_json
           labels:
             "pod_labels_*": |-
               {{ print "{{ kubernetes.pod_labels }}" }}
             "*": |-
               {{ print "{{ metadata }}" }}
-
         stdout:
           type: console
           inputs: [kubernetes_logs]
