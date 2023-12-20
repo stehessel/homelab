@@ -5,4 +5,4 @@ resources:
   - helm.yaml
   - namespace.yaml
   # - route.yaml
-  - service.yaml
+  # - service.yaml

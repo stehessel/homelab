@@ -22,34 +22,34 @@ spec:
       protocol: UDP
       port: 22000
       targetPort: sync
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  labels:
-    app.kubernetes.io/name: syncthing
-  name: syncthing
-spec:
-  gateways:
-    - istio-system/gateway
-  hosts:
-    - syncthing.stehessel.org
-  http:
-    - route:
-        - destination:
-            host: syncthing.syncthing.svc.cluster.local
-            port:
-              number: 8384
-          headers:
-            request:
-              add:
-                # syncthing:syncthing
-                Authorization: "Basic c3luY3RoaW5nOnN5bmN0aGluZw=="
-  tcp:
-    - match:
-        - port: 22000
-      route:
-        - destination:
-            host: syncthing.syncthing.svc.cluster.local
-            port:
-              number: 22000
+# ---
+# apiVersion: networking.istio.io/v1beta1
+# kind: VirtualService
+# metadata:
+#   labels:
+#     app.kubernetes.io/name: syncthing
+#   name: syncthing
+# spec:
+#   gateways:
+#     - istio-system/gateway
+#   hosts:
+#     - syncthing.stehessel.org
+#   http:
+#     - route:
+#         - destination:
+#             host: syncthing.syncthing.svc.cluster.local
+#             port:
+#               number: 8384
+#           headers:
+#             request:
+#               add:
+#                 # syncthing:syncthing
+#                 Authorization: "Basic c3luY3RoaW5nOnN5bmN0aGluZw=="
+#   tcp:
+#     - match:
+#         - port: 22000
+#       route:
+#         - destination:
+#             host: syncthing.syncthing.svc.cluster.local
+#             port:
+#               number: 22000

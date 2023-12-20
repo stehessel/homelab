@@ -16,21 +16,21 @@ spec:
       protocol: TCP
       port: 80
       targetPort: ui
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  labels:
-    app.kubernetes.io/name: mealie
-  name: mealie
-spec:
-  gateways:
-    - istio-system/gateway
-  hosts:
-    - mealie.stehessel.org
-  http:
-    - route:
-        - destination:
-            host: mealie.mealie.svc.cluster.local
-            port:
-              number: 9000
+# ---
+# apiVersion: networking.istio.io/v1beta1
+# kind: VirtualService
+# metadata:
+#   labels:
+#     app.kubernetes.io/name: mealie
+#   name: mealie
+# spec:
+#   gateways:
+#     - istio-system/gateway
+#   hosts:
+#     - mealie.stehessel.org
+#   http:
+#     - route:
+#         - destination:
+#             host: mealie.mealie.svc.cluster.local
+#             port:
+#               number: 9000

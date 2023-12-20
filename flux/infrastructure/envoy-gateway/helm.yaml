@@ -1,0 +1,28 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: envoyproxy
+spec:
+  interval: 5m
+  type: oci
+  url: oci://docker.io/envoyproxy
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: envoy-gateway
+  labels:
+    app.kubernetes.io/name: envoy-gateway
+spec:
+  releaseName: envoy-gateway
+  chart:
+    spec:
+      chart: gateway-helm
+      sourceRef:
+        kind: HelmRepository
+        name: envoyproxy
+      version: v0.6.0
+  interval: 5m
+  # Default values
+  # https://gateway.envoyproxy.io/latest/install/api
+  values:
