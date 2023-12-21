@@ -4,3 +4,4 @@ namespace: ingress
 resources:
   - gateway.yaml
   - namespace.yaml
+  - routes.yaml

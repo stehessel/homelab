@@ -6,6 +6,6 @@ resources:
   - namespace.yaml
   - release.yaml
   - repository.yaml
-  # - route.yaml
+  - routes.yaml
   - secret.yaml
   # - service.yaml

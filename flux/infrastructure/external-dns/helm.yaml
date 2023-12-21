@@ -33,8 +33,11 @@ spec:
       exclude-target-net: 10.0.0.0/8
     provider: cloudflare
     sources:
+      - gateway-grpcroute
       - gateway-httproute
+      - gateway-tcproute
+      - gateway-tlsroute
+      - gateway-udproute
       - ingress
-      - istio-gateway
       - service
     logLevel: debug

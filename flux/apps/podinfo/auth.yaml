@@ -1,0 +1,22 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: oidc
+  labels:
+    app.kubernetes.io/name: envoy-gateway
+spec:
+  oidc:
+    provider:
+      issuer: https://token.actions.githubusercontent.com
+      authorizationEndpoint: https://github.org/login/oauth/access_token
+      tokenEndpoint: https://github.org/login/oauth/access_token
+    clientID: 47d796a786081b2b2863
+    clientSecret:
+      name: oidc-github
+    scopes:
+      - read:org
+      - user:email
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: podinfo

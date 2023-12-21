@@ -4,6 +4,6 @@ namespace: monitoring-system
 resources:
   - helm.yaml
   - namespace.yaml
-  # - route.yaml
+  - routes.yaml
   - secret.yaml
   # - service.yaml

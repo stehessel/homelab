@@ -21,7 +21,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: envoyproxy
-      version: v0.6.0
+      version: v0.0.0-latest
   interval: 5m
   # Default values
   # https://gateway.envoyproxy.io/latest/install/api
