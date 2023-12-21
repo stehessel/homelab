@@ -4,9 +4,8 @@ metadata:
   name: bitnami
 spec:
   interval: 5m
-  # type: oci
-  # url: oci://registry-1.docker.io/bitnamicharts/external-dns
-  url: https://charts.bitnami.com/bitnami
+  type: oci
+  url: oci://docker.io/bitnamicharts
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
