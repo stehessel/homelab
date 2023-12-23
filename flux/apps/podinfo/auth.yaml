@@ -7,15 +7,10 @@ metadata:
 spec:
   oidc:
     provider:
-      issuer: https://token.actions.githubusercontent.com
-      authorizationEndpoint: https://github.org/login/oauth/access_token
-      tokenEndpoint: https://github.org/login/oauth/access_token
-    clientID: 47d796a786081b2b2863
+      issuer: https://stehessel.eu.auth0.com/
+    clientID: ogY2U57PpLPzIEMDq0Tnd5BfBKOEQeDx
     clientSecret:
-      name: oidc-github
-    scopes:
-      - read:org
-      - user:email
+      name: oidc-auth0
   targetRef:
     group: gateway.networking.k8s.io
     kind: HTTPRoute
