@@ -16,11 +16,3 @@ spec:
         - name: whoami
           namespace: whoami
           port: 80
-      filters:
-        - type: RequestHeaderModifier
-          requestHeaderModifier:
-            set:
-              - name: X-Auth-Request-User
-                value: stehessel
-              - name: X-Auth-Request-Email
-                value: login@stephan.sh

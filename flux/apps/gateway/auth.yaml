@@ -11,12 +11,22 @@ spec:
       - X-Auth-Request-Preferred-Username
       - X-Auth-Request-User
       - X-Forwarded-For
+  jwt:
+    providers:
+      - name: auth0
+        remoteJWKS:
+          uri: https://stehessel.eu.auth0.com/.well-known/jwks.json
+        claimToHeaders:
+          - claim: sub
+            header: X-Auth-Request-User
   oidc:
     provider:
       issuer: https://stehessel.eu.auth0.com
     clientID: ogY2U57PpLPzIEMDq0Tnd5BfBKOEQeDx
     clientSecret:
       name: oidc-auth0
+    scopes:
+      - user:email
   targetRef:
     group: gateway.networking.k8s.io
     kind: Gateway
