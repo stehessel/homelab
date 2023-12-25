@@ -6,4 +6,3 @@ resources:
   - monitoring.yaml
   - namespace.yaml
   - routes.yaml
-  # - service.yaml

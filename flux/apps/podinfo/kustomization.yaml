@@ -5,5 +5,3 @@ resources:
   - helm.yaml
   - namespace.yaml
   - routes.yaml
-  # - secret.yaml
-  # - service.yaml

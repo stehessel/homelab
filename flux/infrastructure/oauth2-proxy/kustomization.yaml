@@ -8,4 +8,3 @@ resources:
   - repository.yaml
   - routes.yaml
   - secret.yaml
-  # - service.yaml

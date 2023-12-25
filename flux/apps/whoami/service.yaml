@@ -12,21 +12,3 @@ spec:
       protocol: TCP
       port: 80
       targetPort: web
-# ---
-# apiVersion: networking.istio.io/v1beta1
-# kind: VirtualService
-# metadata:
-#   labels:
-#     app.kubernetes.io/name: whoami
-#   name: whoami
-# spec:
-#   gateways:
-#     - istio-system/gateway
-#   hosts:
-#     - whoami.stehessel.org
-#   http:
-#     - route:
-#         - destination:
-#             host: whoami.whoami.svc.cluster.local
-#             port:
-#               number: 80
