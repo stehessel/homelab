@@ -1,9 +1,9 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: grafana
   labels:
     app.kubernetes.io/name: grafana
+  name: grafana
 spec:
   parentRefs:
     - name: gateway
@@ -16,13 +16,21 @@ spec:
         - name: vm-k8s-grafana
           namespace: monitoring-system
           port: 80
+      filters:
+        - type: ResponseHeaderModifier
+          responseHeaderModifier:
+            set:
+              - name: X-Auth-Request-User
+                value: stehessel
+              - name: X-Auth-Request-Email
+                value: login@stephan.sh
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: vmsingle
   labels:
     app.kubernetes.io/name: vmsingle
+  name: vmsingle
 spec:
   parentRefs:
     - name: gateway
@@ -39,9 +47,9 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: vmalert
   labels:
     app.kubernetes.io/name: vmalert
+  name: vmalert
 spec:
   parentRefs:
     - name: gateway

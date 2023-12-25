@@ -6,11 +6,6 @@ metadata:
   name: oidc
 spec:
   cors:
-    allowHeaders:
-      - X-Auth-Request-Email
-      - X-Auth-Request-Preferred-Username
-      - X-Auth-Request-User
-      - X-Forwarded-For
     exposeHeaders:
       - X-Auth-Request-Email
       - X-Auth-Request-Preferred-Username
