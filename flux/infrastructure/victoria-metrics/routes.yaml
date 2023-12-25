@@ -17,8 +17,8 @@ spec:
           namespace: monitoring-system
           port: 80
       filters:
-        - type: ResponseHeaderModifier
-          responseHeaderModifier:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
             set:
               - name: X-Auth-Request-User
                 value: stehessel
