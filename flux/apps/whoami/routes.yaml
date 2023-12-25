@@ -2,17 +2,17 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   labels:
-    app.kubernetes.io/name: podinfo
-  name: podinfo
+    app.kubernetes.io/name: whoami
+  name: whoami
 spec:
   parentRefs:
     - name: gateway
       namespace: ingress
       sectionName: https
   hostnames:
-    - podinfo.stehessel.org
+    - whoami.stehessel.org
   rules:
     - backendRefs:
-        - name: podinfo
-          namespace: podinfo
-          port: 9898
+        - name: whoami
+          namespace: whoami
+          port: 80
