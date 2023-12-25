@@ -3,11 +3,11 @@ kind: SecurityPolicy
 metadata:
   name: oidc
   labels:
-    app.kubernetes.io/name: envoy-gateway
+    app.kubernetes.io/name: podinfo
 spec:
   oidc:
     provider:
-      issuer: https://stehessel.eu.auth0.com/
+      issuer: https://stehessel.eu.auth0.com
     clientID: ogY2U57PpLPzIEMDq0Tnd5BfBKOEQeDx
     clientSecret:
       name: oidc-auth0
@@ -15,3 +15,4 @@ spec:
     group: gateway.networking.k8s.io
     kind: HTTPRoute
     name: podinfo
+    namespace: podinfo
