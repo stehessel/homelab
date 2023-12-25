@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/name: mealie
+  name: podinfo
+spec:
+  parentRefs:
+    - name: gateway
+      namespace: ingress
+      sectionName: https
+  hostnames:
+    - mealie.stehessel.org
+  rules:
+    - backendRefs:
+        - name: mealie
+          namespace: mealie
+          port: 9000

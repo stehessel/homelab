@@ -1,0 +1,30 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  labels:
+    app.kubernetes.io/name: ingress
+  name: oidc
+spec:
+  cors:
+    allowHeaders:
+      - X-Auth-Request-Email
+      - X-Auth-Request-Preferred-Username
+      - X-Auth-Request-User
+      - X-Forwarded-For
+    exposeHeaders:
+      - X-Auth-Request-Email
+      - X-Auth-Request-Preferred-Username
+      - X-Auth-Request-User
+      - X-Forwarded-For
+  oidc:
+    provider:
+      issuer: https://stehessel.eu.auth0.com
+    clientID: ogY2U57PpLPzIEMDq0Tnd5BfBKOEQeDx
+    clientSecret:
+      name: oidc-auth0
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: gateway
+    namespace: ingress
+    # sectionName: https

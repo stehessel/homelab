@@ -1,6 +1,8 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: GatewayClass
 metadata:
+  labels:
+    app.kubernetes.io/name: ingress
   name: envoy-gateway
 spec:
   controllerName: gateway.envoyproxy.io/gatewayclass-controller
@@ -8,9 +10,11 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: Gateway
 metadata:
-  name: gateway
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-staging
+  labels:
+    app.kubernetes.io/name: ingress
+  name: gateway
 spec:
   gatewayClassName: envoy-gateway
   listeners:

@@ -4,5 +4,6 @@ namespace: mealie
 resources:
   - deployment.yaml
   - namespace.yaml
+  - routes.yaml
   - service.yaml
   - storage.yaml
