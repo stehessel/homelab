@@ -37,11 +37,6 @@ tasks:
       - flux install --export > ./flux/clusters/k3s/flux-system/gotk-components.yaml
     desc: Upgrade fluxcd
 
-  istio:manifest:
-    cmds:
-      - istioctl manifest generate -f ./config/istio/operator.yaml -o ./flux/istio
-    desc: Generate Istio manifests based on operator resource
-
   backup:create:
     cmds:
       - velero backup create --from-schedule homelab

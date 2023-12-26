@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - envoy-gateway
   - external-dns
-  # - istio-gateway
   - kyverno
   - loki
   - monitoring

@@ -11,7 +11,6 @@ spec:
   dependsOn:
     - name: crds
     - name: infrastructure
-    # - name: istio
   interval: 2m0s
   path: ./flux/apps
   prune: true
