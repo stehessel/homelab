@@ -16,14 +16,6 @@ spec:
         - name: vm-k8s-grafana
           namespace: monitoring-system
           port: 80
-      filters:
-        - type: RequestHeaderModifier
-          requestHeaderModifier:
-            set:
-              - name: X-Auth-Request-User
-                value: stehessel
-              - name: X-Auth-Request-Email
-                value: login@stephan.sh
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute

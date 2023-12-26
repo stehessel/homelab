@@ -5,20 +5,20 @@ metadata:
     app.kubernetes.io/name: ingress
   name: oidc
 spec:
-  cors:
-    exposeHeaders:
-      - X-Auth-Request-Email
-      - X-Auth-Request-Preferred-Username
-      - X-Auth-Request-User
-      - X-Forwarded-For
   jwt:
     providers:
       - name: auth0
         remoteJWKS:
           uri: https://stehessel.eu.auth0.com/.well-known/jwks.json
         claimToHeaders:
-          - claim: sub
+          - claim: email
+            header: X-Auth-Request-Email
+          - claim: nickname
             header: X-Auth-Request-User
+          - claim: nickname
+            header: X-Auth-Request-Preferred-Username
+        extractFrom:
+          cookies: ["IdToken"]
   oidc:
     provider:
       issuer: https://stehessel.eu.auth0.com
@@ -26,7 +26,8 @@ spec:
     clientSecret:
       name: oidc-auth0
     scopes:
-      - user:email
+      - email
+      - profile
   targetRef:
     group: gateway.networking.k8s.io
     kind: Gateway
