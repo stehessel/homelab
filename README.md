@@ -4,12 +4,16 @@
 
 Infrastructure code to run my home lab Kubernetes cluster.
 
-## Continuous deployment
+## GitOps controller
 
-Bootstrap `fluxcd` via
+Turn up the cluster via
 
 ```sh
-task flux:bootstrap
+task up
 ```
 
-after setting the `GITHUB_USER` and `GITHUB_TOKEN` environment variables (see [.envrc](.envrc)).
+Turn down the cluster via
+
+```sh
+task down
+```

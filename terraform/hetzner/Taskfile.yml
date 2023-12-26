@@ -4,7 +4,7 @@ tasks:
   init:
     cmds:
       - terraform init -upgrade
-    desc: Init terraform with backblaze backend
+    desc: Init terraform
 
   apply:
     cmds:
