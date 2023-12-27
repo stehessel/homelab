@@ -157,4 +157,3 @@ provider "registry.terraform.io/tenstad/remote" {
     "zh:f644ec7496cffc23ca7d01f12e41b626dfd52aa730213575e8ea6f721f7cc8bb",
     "zh:f9f15f672d0bdb1a1988e632e6665ee5eecf7dce964b056e916c8cb336fef897",
   ]
-}
