@@ -4,3 +4,4 @@ namespace: vector
 resources:
   - helm.yaml
   - namespace.yaml
+  - secret.yaml

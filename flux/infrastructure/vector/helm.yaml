@@ -29,6 +29,9 @@ spec:
       enabled: true
       hostPath:
         enabled: false
+    envFrom:
+      - secretRef:
+          name: vector
     customConfig:
       data_dir: /vector-data-dir
       api:
@@ -73,12 +76,12 @@ spec:
           inputs: ["kubernetes_logs"]
           account_id: "4287142"
           api: logs
-          license_key: eu01xx96a9fbb51eead1b7bee9de37f1FFFFNRAL
+          license_key: ${NEW_RELIC_KEY}
           region: eu
         new_relic_metrics:
           type: new_relic
           inputs: ["prometheus_remote_write"]
           account_id: "4287142"
           api: metrics
-          license_key: eu01xx96a9fbb51eead1b7bee9de37f1FFFFNRAL
+          license_key: ${NEW_RELIC_KEY}
           region: eu
