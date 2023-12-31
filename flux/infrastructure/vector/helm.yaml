@@ -71,17 +71,17 @@ spec:
               {{ print "{{ kubernetes.pod_labels }}" }}
             "*": |-
               {{ print "{{ metadata }}" }}
-        new_relic_logs:
-          type: new_relic
-          inputs: ["kubernetes_logs"]
-          account_id: "4287142"
-          api: logs
-          license_key: ${NEW_RELIC_KEY}
-          region: eu
-        new_relic_metrics:
-          type: new_relic
-          inputs: ["prometheus_remote_write"]
-          account_id: "4287142"
-          api: metrics
-          license_key: ${NEW_RELIC_KEY}
-          region: eu
+        # new_relic_logs:
+        #   type: new_relic
+        #   inputs: ["kubernetes_logs"]
+        #   account_id: "4287142"
+        #   api: logs
+        #   license_key: ${NEW_RELIC_KEY}
+        #   region: eu
+        # new_relic_metrics:
+        #   type: new_relic
+        #   inputs: ["prometheus_remote_write"]
+        #   account_id: "4287142"
+        #   api: metrics
+        #   license_key: ${NEW_RELIC_KEY}
+        #   region: eu
