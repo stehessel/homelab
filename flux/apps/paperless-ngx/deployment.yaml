@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx
+  labels:
+    app.kubernetes.io/component: webserver
+    app.kubernetes.io/name: paperless-ngx
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: webserver
+      app.kubernetes.io/name: paperless-ngx
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: data,media
+      labels:
+        app.kubernetes.io/component: webserver
+        app.kubernetes.io/name: paperless-ngx
+    spec:
+      containers:
+        - name: paperless-ngx
+          image: ghcr.io/paperless-ngx/paperless-ngx
+          env:
+            - name: PAPERLESS_ADMIN_USER
+              value: stehessel
+            - name: PAPERLESS_AUTO_LOGIN_USERNAME
+              value: stehessel
+            - name: PAPERLESS_URL
+              value: https://docs.stehessel.org
+            - name: PAPERLESS_OCR_LANGUAGE
+              value: deu+eng
+            - name: PAPERLESS_REDIS
+              value: redis://redis-master.paperless-ngx.svc:6379
+            - name: PAPERLESS_TIKA_ENABLED
+              value: "1"
+            - name: PAPERLESS_TIKA_ENDPOINT
+              value: http://tika.paperless-ngx.svc:9998
+            - name: PAPERLESS_TIKA_GOTENBERG_ENDPOINT
+              value: http://gotenberg.paperless-ngx.svc:80
+          envFrom:
+            - secretRef:
+                name: paperless-ngx
+          ports:
+            - containerPort: 8000
+              name: web
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            # runAsNonRoot: true
+            capabilities:
+              add: ["CHOWN", "SETGID", "SETUID"]
+              drop: ["ALL"]
+            seccompProfile:
+              type: "RuntimeDefault"
+          volumeMounts:
+            - mountPath: /usr/src/paperless/data
+              name: data
+            - mountPath: /usr/src/paperless/media
+              name: media
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: paperless-ngx-data
+        - name: media
+          persistentVolumeClaim:
+            claimName: paperless-ngx-media

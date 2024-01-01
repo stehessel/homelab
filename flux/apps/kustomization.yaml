@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - gateway
   - mealie
+  - paperless-ngx
   - podinfo
   - policies
   - policy-reporter
