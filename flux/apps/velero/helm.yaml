@@ -37,7 +37,7 @@ spec:
             name: backblaze
             key: credentials
           default: true
-          name: backblaze
+          name: default
           provider: velero.io/aws
     containerSecurityContext:
       securityContext:
