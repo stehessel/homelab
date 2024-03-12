@@ -20,12 +20,20 @@ spec:
                 - Pod
       verifyImages:
         - imageReferences:
+            - "docker.io/fluxcd/helm-controller:*"
+            - "docker.io/fluxcd/image-automation-controller:*"
+            - "docker.io/fluxcd/image-reflector-controller:*"
+            - "docker.io/fluxcd/kustomize-controller:*"
+            - "docker.io/fluxcd/notification-controller:*"
+            - "docker.io/fluxcd/source-controller:*"
             - "ghcr.io/fluxcd/helm-controller:*"
             - "ghcr.io/fluxcd/image-automation-controller:*"
             - "ghcr.io/fluxcd/image-reflector-controller:*"
             - "ghcr.io/fluxcd/kustomize-controller:*"
             - "ghcr.io/fluxcd/notification-controller:*"
             - "ghcr.io/fluxcd/source-controller:*"
+          mutateDigest: false
+          verifyDigest: false
           attestors:
             - entries:
                 - keyless:
