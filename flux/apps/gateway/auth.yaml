@@ -5,20 +5,22 @@ metadata:
     app.kubernetes.io/name: ingress
   name: oidc
 spec:
-  # jwt:
-  #   providers:
-  #     - name: auth0
-  #       remoteJWKS:
-  #         uri: https://stehessel.eu.auth0.com/.well-known/jwks.json
-  #       claimToHeaders:
-  #         - claim: email
-  #           header: X-Auth-Request-Email
-  #         - claim: nickname
-  #           header: X-Auth-Request-User
-  #         - claim: nickname
-  #           header: X-Auth-Request-Preferred-Username
-  #       extractFrom:
-  #         cookies: ["IdToken-63b6f6de"]
+  jwt:
+    providers:
+      - name: auth0
+        remoteJWKS:
+          uri: https://stehessel.eu.auth0.com/.well-known/jwks.json
+        claimToHeaders:
+          - claim: email
+            header: X-Auth-Request-Email
+          - claim: nickname
+            header: X-Auth-Request-User
+          - claim: nickname
+            header: X-Auth-Request-Preferred-Username
+        extractFrom:
+          cookies: ["IdToken-63b6f6de"]
+        issuer: https://stehessel.eu.auth0.com/
+        audiences: ["ogY2U57PpLPzIEMDq0Tnd5BfBKOEQeDx"]
   oidc:
     provider:
       issuer: https://stehessel.eu.auth0.com
