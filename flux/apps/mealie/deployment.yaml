@@ -37,12 +37,14 @@ spec:
               cpu: 100m
           securityContext:
             allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: false
-            # runAsNonRoot: true
             capabilities:
               drop: ["ALL"]
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1000
             seccompProfile:
-              type: "RuntimeDefault"
+              type: RuntimeDefault
           volumeMounts:
             - mountPath: /app/data
               name: data
