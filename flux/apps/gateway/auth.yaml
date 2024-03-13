@@ -18,7 +18,7 @@ spec:
           - claim: nickname
             header: X-Auth-Request-Preferred-Username
         extractFrom:
-          cookies: ["IdToken"]
+          cookies: ["IdToken-63b6f6de"]
   oidc:
     provider:
       issuer: https://stehessel.eu.auth0.com
@@ -33,4 +33,3 @@ spec:
     kind: Gateway
     name: gateway
     namespace: ingress
-    # sectionName: https
