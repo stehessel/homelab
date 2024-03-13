@@ -27,11 +27,15 @@ spec:
   values:
     cleanupJobs:
       admissionReports:
+        image:
+          tag: latest
         podLabels:
           app.kubernetes.io/component: admissionReports
           app.kubernetes.io/name: kyverno
           app.kubernetes.io/part-of: kyverno-cleanup
       clusterAdmissionReports:
+        image:
+          tag: latest
         podLabels:
           app.kubernetes.io/component: clusterAdmissionReports
           app.kubernetes.io/name: kyverno
@@ -40,3 +44,9 @@ spec:
       app.kubernetes.io/name: kyverno
     grafana:
       enabled: true
+    policyReportsCleanup:
+      image:
+        tag: latest
+    webhooksCleanup:
+      image:
+        tag: latest
