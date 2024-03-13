@@ -82,3 +82,7 @@ spec:
     vmagent:
       additionalRemoteWrites:
         - url: http://vector.vector.svc.cluster.local:9091
+      spec:
+        resources:
+          limits:
+            cpu: "1"
