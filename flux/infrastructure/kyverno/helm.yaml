@@ -44,6 +44,8 @@ spec:
       app.kubernetes.io/name: kyverno
     grafana:
       enabled: true
+    image:
+      pullPolicy: Always
     policyReportsCleanup:
       image:
         tag: latest
