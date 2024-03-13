@@ -39,11 +39,7 @@ tasks:
 
   backup:create:
     cmds:
-      - velero backup create --from-schedule homelab
-
-  backup:schedule:
-    cmds:
-      - velero schedule create homelab --schedule="0 12 * * *" --include-namespaces=mealie,syncthing
+      - velero backup create --from-schedule velero-homelab
 
   backup:restore:
     cmds:
@@ -55,7 +51,7 @@ tasks:
       - kubectl delete deployments syncthing -n syncthing
       - kubectl delete pvc syncthing -n syncthing
 
-      - velero restore create --from-schedule homelab --include-namespaces=mealie,syncthing --wait
+      - velero restore create --from-schedule velero-homelab --include-namespaces=mealie,syncthing --wait
 
   velero:repo-secret:
     cmds:

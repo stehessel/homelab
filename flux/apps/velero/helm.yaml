@@ -60,14 +60,14 @@ spec:
       privileged: true
     schedules:
       homelab:
-        disabled: true
+        disabled: false
         schedule: "0 0 * * *"
         template:
           includedNamespaces:
             - mealie
             - syncthing
           storageLocation: default
-          ttl: 90d
+          ttl: 2160h # 90 days.
         useOwnerReferencesInBackup: false
     snapshotsEnabled: false
     upgradeCRDs: false
