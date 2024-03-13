@@ -25,6 +25,11 @@ spec:
   # Default values
   # https://artifacthub.io/packages/helm/kyverno/kyverno
   values:
+    backgroundController:
+      podLabels:
+        app.kubernetes.io/component: backgroundController
+        app.kubernetes.io/name: kyverno
+        app.kubernetes.io/part-of: kyverno-controller
     cleanupJobs:
       admissionReports:
         image:
@@ -49,6 +54,11 @@ spec:
     policyReportsCleanup:
       image:
         tag: latest
+    reportsController:
+      podLabels:
+        app.kubernetes.io/component: reportsController
+        app.kubernetes.io/name: kyverno
+        app.kubernetes.io/part-of: kyverno-reports
     webhooksCleanup:
       image:
         tag: latest
