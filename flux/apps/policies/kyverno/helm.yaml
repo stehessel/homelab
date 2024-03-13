@@ -25,7 +25,7 @@ spec:
   # https://github.com/kyverno/kyverno/blob/main/charts/kyverno-policies/values.yaml
   values:
     policyExclude:
-      disallow-host-path:
+      disallow-host-namespaces:
         any:
           - resources:
               kinds:
