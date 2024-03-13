@@ -85,4 +85,4 @@ spec:
       spec:
         resources:
           limits:
-            cpu: "1"
+            cpu: null
