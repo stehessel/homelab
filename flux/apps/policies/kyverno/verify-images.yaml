@@ -50,6 +50,8 @@ spec:
       verifyImages:
         - imageReferences:
             - "ghcr.io/stefanprodan/podinfo"
+          mutateDigest: false
+          verifyDigest: false
           attestors:
             - entries:
                 - keyless:
