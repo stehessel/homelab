@@ -58,5 +58,16 @@ spec:
     deployNodeAgent: true
     nodeAgent:
       privileged: true
+    schedules:
+      homelab:
+        disabled: true
+        schedule: "0 0 * * *"
+        template:
+          includedNamespaces:
+            - mealie
+            - syncthing
+          storageLocation: default
+          ttl: 90d
+        useOwnerReferencesInBackup: false
     snapshotsEnabled: false
     upgradeCRDs: false
