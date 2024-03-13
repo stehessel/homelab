@@ -24,3 +24,14 @@ spec:
   # Default values
   # https://github.com/kyverno/kyverno/blob/main/charts/kyverno-policies/values.yaml
   values:
+    policyExclude:
+      disallow-host-path:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - trivy-operator
+              selector:
+                matchLabels:
+                  app: node-collector
