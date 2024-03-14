@@ -36,15 +36,16 @@ spec:
             requests:
               cpu: 100m
           securityContext:
-            # allowPrivilegeEscalation: false
+            allowPrivilegeEscalation: false
             capabilities:
+              add: ["CHOWN", "SETGID", "SETUID"]
               drop: ["ALL"]
-            # readOnlyRootFilesystem: true
-            # runAsGroup: 1000
-            # runAsNonRoot: true
-            # runAsUser: 1000
-            # seccompProfile:
-            #   type: RuntimeDefault
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1000
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - mountPath: /app/data
               name: data
