@@ -8,8 +8,7 @@ spec:
   jwt:
     providers:
       - name: auth0
-        remoteJWKS:
-          uri: https://stehessel.eu.auth0.com/.well-known/jwks.json
+        audiences: ["ogY2U57PpLPzIEMDq0Tnd5BfBKOEQeDx"]
         claimToHeaders:
           - claim: email
             header: X-Auth-Request-Email
@@ -20,7 +19,8 @@ spec:
         extractFrom:
           cookies: ["IdToken-63b6f6de"]
         issuer: https://stehessel.eu.auth0.com/
-        audiences: ["ogY2U57PpLPzIEMDq0Tnd5BfBKOEQeDx"]
+        remoteJWKS:
+          uri: https://stehessel.eu.auth0.com/.well-known/jwks.json
   oidc:
     provider:
       issuer: https://stehessel.eu.auth0.com
