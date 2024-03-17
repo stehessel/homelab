@@ -58,6 +58,9 @@ spec:
     deployNodeAgent: true
     nodeAgent:
       privileged: true
+    resources:
+      limits:
+        cpu: null
     schedules:
       homelab:
         disabled: false
@@ -70,4 +73,4 @@ spec:
           ttl: 2160h # 90 days.
         useOwnerReferencesInBackup: false
     snapshotsEnabled: false
-    upgradeCRDs: false
+    upgradeCRDs: true
