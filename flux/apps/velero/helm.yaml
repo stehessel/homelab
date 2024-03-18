@@ -40,12 +40,14 @@ spec:
           name: default
           provider: velero.io/aws
     containerSecurityContext:
-      allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
-      capabilities:
-        drop: ["ALL"]
-      seccompProfile:
-        type: "RuntimeDefault"
+      privileged: true
+      runAsUser: "0"
+    #   allowPrivilegeEscalation: false
+    #   readOnlyRootFilesystem: true
+    #   capabilities:
+    #     drop: ["ALL"]
+    #   seccompProfile:
+    #     type: "RuntimeDefault"
     initContainers:
       - name: velero-plugin-for-aws
         image: velero/velero-plugin-for-aws
