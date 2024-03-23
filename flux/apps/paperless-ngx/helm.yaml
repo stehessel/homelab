@@ -28,10 +28,21 @@ spec:
     architecture: standalone
     auth:
       enabled: false
-    global:
-      storageClass: longhorn
     commonLabels:
       app.kubernetes.io/part-of: paperless-ngx
+    global:
+      storageClass: longhorn
+    master:
+      resourcesPreset: none
+      resources:
+        limits:
+          cpu: null
+          ephemeral-storage: 1024Mi
+          memory: 1024Mi
+        requests:
+          cpu: 100m
+          ephemeral-storage: 50Mi
+          memory: 256Mi
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -94,3 +105,6 @@ spec:
     image:
       repository: ghcr.io/paperless-ngx/tika
       tag: latest
+    resources:
+      limits:
+        cpu: null
