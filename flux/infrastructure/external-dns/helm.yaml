@@ -32,6 +32,9 @@ spec:
     extraArgs:
       exclude-target-net: 10.0.0.0/8
     provider: cloudflare
+    resources:
+      limits:
+        cpu: null
     sources:
       - gateway-grpcroute
       - gateway-httproute
