@@ -10,11 +10,7 @@
     };
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    flake-parts,
-    ...
-  }:
+  outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = inputs.nixpkgs.lib.systems.flakeExposed;
 
@@ -28,7 +24,7 @@
         system,
         ...
       }: {
-        _module.args.pkgs = import nixpkgs {
+        _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           config.allowUnfree = true;
         };
