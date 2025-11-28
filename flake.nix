@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    pre-commit-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -15,7 +15,7 @@
       systems = inputs.nixpkgs.lib.systems.flakeExposed;
 
       imports = [
-        inputs.pre-commit-hooks.flakeModule
+        inputs.git-hooks.flakeModule
       ];
 
       perSystem = {

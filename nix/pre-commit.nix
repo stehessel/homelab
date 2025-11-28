@@ -42,4 +42,6 @@
       types = ["text"];
     };
   };
+
+  package = pkgs.prek;
 }
